@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "322964771688",
+    "firebase_url": "https://projetoeventos-7e9af.firebaseio.com",
+    "project_id": "projetoeventos-7e9af",
+    "storage_bucket": "projetoeventos-7e9af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322964771688:android:f66b7c407d4c8018",
+        "android_client_info": {
+          "package_name": "com.example.vinic.projetoeventos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322964771688-lbe42ogksvn0dea4kh55m8ao7chlkh56.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vinic.projetoeventos",
+            "certificate_hash": "0148e132f23c742134142f18056ac898b505cdf5"
+          }
+        },
+        {
+          "client_id": "322964771688-r5r77o903v4gfmpp13f9is5901fmuk9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6f_aTKchLWVYPmsj5Aa5oqxVuTQqxbP0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322964771688-r5r77o903v4gfmpp13f9is5901fmuk9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
