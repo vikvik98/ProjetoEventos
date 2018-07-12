@@ -1,2 +1,2 @@
 # ProjetoEventos
-Projeto final da materia Corporativa. Vinicius Tomaz, Francisco Roberth e Daniel Messias
+Projeto final da materia Corporativa. Vinicius Tomaz, Francisco Roberth, Daniel Messias e Filipe Neiva
