@@ -4,10 +4,8 @@ import android.widget.EditText;
 
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Usuario;
-import com.google.firebase.database.DatabaseReference;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class UsuarioController {
 
@@ -24,9 +22,11 @@ public class UsuarioController {
         Usuario usuario = new Usuario(nomeUsuario,senhaUsuario,emailUsuario);
         String idUser = Integer.toString(id);
 
-        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).setValue(usuario);
+        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).push().setValue(usuario);
         id += 1;
 
 
     }
+
+
 }
