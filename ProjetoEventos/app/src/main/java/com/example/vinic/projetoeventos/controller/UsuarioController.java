@@ -9,7 +9,6 @@ import com.example.vinic.projetoeventos.model.Usuario;
 
 public class UsuarioController {
 
-    public static int id = 0;
 
     public UsuarioController() {
 
@@ -20,10 +19,8 @@ public class UsuarioController {
         String senhaUsuario = senha.getText().toString();
         String emailUsuario = email.getText().toString();
         Usuario usuario = new Usuario(nomeUsuario,senhaUsuario,emailUsuario);
-        String idUser = Integer.toString(id);
 
-        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).push().setValue(usuario);
-        id += 1;
+        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().setValue(usuario);
 
 
     }
