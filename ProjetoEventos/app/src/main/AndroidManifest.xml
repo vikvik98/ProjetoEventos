@@ -19,7 +19,8 @@
         <activity android:name=".app.MainActivity" />
         <activity android:name=".app.CadastroActivity" />
         <activity android:name=".app.InscricaoActivity" />
-        <activity android:name=".app.CadastrarEventoActivity"></activity>
+        <activity android:name=".app.CadastrarEventoActivity" />
+        <activity android:name=".app.CadastrarAtividadeActivity"></activity>
     </application>
 
 </manifest>
