@@ -5,14 +5,13 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class InscricaoActivity extends AppCompatActivity {
 
-    private RecyclerView rvEventos;
+    private RecyclerView rvInscricao;
     private EventosAdapter adapter;
     private CardView cardEvento;
 
@@ -28,24 +27,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void reloadData() {
 
-       // adapter = new EventosAdapter(this, livros, boxLivros);
-        rvEventos.setAdapter(adapter);
-        rvEventos.setLayoutManager(new LinearLayoutManager(this));
-        rvEventos.setHasFixedSize(true);
+        // adapter = new EventosAdapter(this, livros);
+        rvInscricao.setAdapter(adapter);
+        rvInscricao.setLayoutManager(new LinearLayoutManager(this));
+        rvInscricao.setHasFixedSize(true);
 
     }
 
 
     private void setupViews () {
 
-       // rv = findViewById(R.id.rv_livros);
+        // rv = findViewById(R.id.rv_livros);
         cardEvento = findViewById(R.id.card_evento);
     }
 
-    public void novoEvento(View view) {
-
-
-    }
-
-    //reclamação, se eu conseguir resolver, ai está a oportunidade
 }
