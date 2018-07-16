@@ -12,8 +12,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class UsuarioController {
 
-    private static int id = 0;
-
     public UsuarioController() {
 
     }
@@ -22,10 +20,10 @@ public class UsuarioController {
         String nomeUsuario = nome.getText().toString();
         String senhaUsuario = senha.getText().toString();
         String emailUsuario = email.getText().toString();
-        String idUser = Integer.toString(id);
-        Usuario usuario = new Usuario(nomeUsuario,senhaUsuario,emailUsuario, idUser);
-        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").child(idUser).push().setValue(usuario);
-        id += 1;
+
+        Usuario usuario = new Usuario(nomeUsuario,senhaUsuario,emailUsuario);
+
+        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().setValue(usuario);
 
     }
 

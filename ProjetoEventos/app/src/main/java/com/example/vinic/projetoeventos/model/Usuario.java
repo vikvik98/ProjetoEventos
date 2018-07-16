@@ -8,17 +8,15 @@ public class Usuario {
     private String nome;
     private String senha;
     private String email;
-    private String id;
     private List<Tag> tags;
     private List<Inscricao> inscricoes;
     private List<Evento> eventos;
 
 
-    public Usuario(String nome, String senha, String email, String id) {
+    public Usuario(String nome, String senha, String email) {
         this.nome = nome;
         this.senha = senha;
         this.email = email;
-        this.id = id;
     }
 
     public String getNome() {
@@ -69,11 +67,4 @@ public class Usuario {
         this.eventos = eventos;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 }
