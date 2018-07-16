@@ -1,6 +1,7 @@
 package com.example.vinic.projetoeventos.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
@@ -10,7 +11,7 @@ public class Usuario {
     private String email;
     private List<Tag> tags;
     private List<Inscricao> inscricoes;
-    private List<Evento> eventos;
+    private List<Evento> eventos = new ArrayList<>();
 
     public Usuario(){
 
@@ -20,6 +21,9 @@ public class Usuario {
         this.nome = nome;
         this.senha = senha;
         this.email = email;
+        this.tags = new ArrayList<>();
+        this.inscricoes = new ArrayList<>();
+        this.eventos = new ArrayList<>();;
     }
 
 
