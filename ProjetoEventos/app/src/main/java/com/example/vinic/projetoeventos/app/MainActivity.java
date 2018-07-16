@@ -1,5 +1,6 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void reloadData() {
 
-       // adapter = new EventosAdapter(this, livros, boxLivros);
+        adapter = new EventosAdapter(this, LoginActivity.usuario.getEventos());
         rvEventos.setAdapter(adapter);
         rvEventos.setLayoutManager(new LinearLayoutManager(this));
         rvEventos.setHasFixedSize(true);
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void novoEvento(View view) {
+        startActivity(new Intent(this,CadastrarEventoActivity.class));
 
 
     }
