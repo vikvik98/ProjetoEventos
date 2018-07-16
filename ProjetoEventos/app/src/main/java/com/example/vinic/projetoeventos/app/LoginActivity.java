@@ -58,19 +58,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void entrar(View view){
+
+        boolean existe = false;
+
         for (int i = 0; i < usuarios.size(); i++) {
-            if(usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
-                if(usuarios.get(i).getSenha().equals(editTextSenha.getText().toString())){
-                    usuario = UsuarioController.logarUsuario(editTextEmail);
-                    Toast.makeText(this, "Usuario Logado com sucesso!", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, "Senha do usuario errada!", Toast.LENGTH_SHORT).show();
-                }
-            }else {
-                Toast.makeText(this, "Email não encontrado!", Toast.LENGTH_SHORT).show();
+            existe = isExiste(existe, i);
+
+            if (existe){
+                realizarLogin();
+            }else{
+                Toast.makeText(this, "Usuario não encontrado!", Toast.LENGTH_SHORT).show();
             }
         }
 
+    }
+
+    private void realizarLogin() {
+        usuario = UsuarioController.logarUsuario(editTextEmail);
+        Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    private boolean isExiste(boolean existe, int i) {
+        if(usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
+            if(usuarios.get(i).getSenha().equals(editTextSenha.getText().toString())){
+                existe = true;
+            }
+        }
+        return existe;
     }
 
     public void cadastrar(View view) {

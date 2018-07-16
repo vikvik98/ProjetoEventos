@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rvEventos;
     private EventosAdapter adapter;
-    private CardView cardEvento;
 
 
     @Override
@@ -27,20 +26,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void reloadData() {
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        adapter = new EventosAdapter(this, LoginActivity.usuario.getEventos());
-        rvEventos.setAdapter(adapter);
-        rvEventos.setLayoutManager(new LinearLayoutManager(this));
-        rvEventos.setHasFixedSize(true);
-
+        //reloadData();
     }
+
+//    private void reloadData() {
+//
+//        adapter = new EventosAdapter(this, LoginActivity.usuario.getEventos());
+//        rvEventos.setAdapter(adapter);
+//        rvEventos.setLayoutManager(new LinearLayoutManager(this));
+//        rvEventos.setHasFixedSize(true);
+//
+//    }
 
 
     private void setupViews () {
 
-       // rv = findViewById(R.id.rv_livros);
-        cardEvento = findViewById(R.id.card_evento);
+        //rvEventos = findViewById(R.id.rv_eventos);
+
     }
 
     public void novoEvento(View view) {
