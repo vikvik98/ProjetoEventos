@@ -31,7 +31,7 @@
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/comfirmar_senha_cadastro"
+        android:id="@+id/confirmar_senha_cadastro"
         android:hint="@string/repita_a_senha"
         android:inputType="textPassword"
         android:layout_width="match_parent"

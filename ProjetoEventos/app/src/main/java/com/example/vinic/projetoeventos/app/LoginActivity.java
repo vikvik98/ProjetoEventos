@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.controller.UsuarioController;
@@ -21,16 +23,23 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
-    List<Usuario> usuarios = new ArrayList<>();
+    public static List<Usuario> usuarios;
+    public static Usuario usuario;
     DatabaseReference databaseReference = ConfiguracaoFirebase.getDatabaseReference().child("usuarios");
+    private EditText editTextEmail;
+    private EditText editTextSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        setupViews();
+        usuarios = new ArrayList<>();
+        pegarUsuariosNoFirebase();
     }
 
-    public void entrar(View view){
+
+    public void pegarUsuariosNoFirebase(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -45,13 +54,33 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-        for (int i = 0; i < usuarios.size(); i++){
-            System.out.println(usuarios.get(i).getNome());
+    public void entrar(View view){
+        for (int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
+                if(usuarios.get(i).getSenha().equals(editTextSenha.getText().toString())){
+                    usuario = UsuarioController.logarUsuario(editTextEmail);
+                    Toast.makeText(this, "Usuario Logado com sucesso!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Senha do usuario errada!", Toast.LENGTH_SHORT).show();
+                }
+            }else {
+                Toast.makeText(this, "Email não encontrado!", Toast.LENGTH_SHORT).show();
+            }
         }
+
     }
 
     public void cadastrar(View view) {
         startActivity(new Intent(this, CadastroActivity.class));
     }
+
+
+    private void setupViews() {
+        editTextEmail = findViewById(R.id.id_email);
+        editTextSenha = findViewById(R.id.id_senha);
+
+    }
+
 }
