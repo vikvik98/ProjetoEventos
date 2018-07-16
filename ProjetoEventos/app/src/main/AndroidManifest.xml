@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.MainActivity" />
+        <activity android:name=".app.MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".app.CadastroActivity" />
         <activity android:name=".app.InscricaoActivity" />
         <activity android:name=".app.CadastrarEventoActivity" />
