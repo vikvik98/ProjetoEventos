@@ -1,6 +1,8 @@
 package com.example.vinic.projetoeventos.app;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -10,49 +12,39 @@ import android.view.View;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
+import com.example.vinic.projetoeventos.holder.FragmentEventos;
+import com.example.vinic.projetoeventos.holder.ViewPageAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView rvEventos;
-    private EventosAdapter adapter;
-
+    private ViewPageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        setupViews();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        ViewPager viewPager = findViewById(R.id.view_pager);
+        setupViewPager(viewPager);
 
-        //reloadData();
-    }
-
-//    private void reloadData() {
-//
-//        adapter = new EventosAdapter(this, LoginActivity.usuario.getEventos());
-//        rvEventos.setAdapter(adapter);
-//        rvEventos.setLayoutManager(new LinearLayoutManager(this));
-//        rvEventos.setHasFixedSize(true);
-//
-//    }
-
-
-    private void setupViews () {
-
-        //rvEventos = findViewById(R.id.rv_eventos);
-
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     public void novoEvento(View view) {
         startActivity(new Intent(this,CadastrarEventoActivity.class));
 
+    }
 
+    private void setupViewPager(ViewPager viewPager) {
+        adapter = new ViewPageAdapter(getSupportFragmentManager());
+        adapter.addFragment(new FragmentEventos(), "Eventos");
+        //adapter.addFragment(new AgendaFragment(), "Agenda");
+        viewPager.setAdapter(adapter);
     }
 
     //reclamação, se eu conseguir resolver, ai está a oportunidade
