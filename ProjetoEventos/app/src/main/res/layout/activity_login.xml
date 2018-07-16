@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#009688"
+    tools:context="com.example.vinic.projetoeventos.app.LoginActivity">
+
+    <TextView
+        android:layout_marginTop="100sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Event Facility"
+        android:gravity="center"
+        android:textSize="40sp"/>
+
+
+    <EditText
+        android:id="@+id/id_email"
+        android:layout_marginTop="20sp"
+        android:hint="@string/digite_seu_email"
+        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/id_senha"
+        android:layout_marginTop="20sp"
+        android:hint="@string/digite_sua_senha"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+    <Button
+        android:layout_marginTop="20sp"
+        android:text="@string/entrar"
+        android:id="@+id/btn_entrar"
+        android:onClick="entrar"
+        android:backgroundTint="#B2DFDB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_marginTop="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:textSize="17sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/n_o_tem_conta"/>
+
+        <TextView
+            android:onClick="cadastrar"
+            android:textSize="17sp"
+            android:gravity="start"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cadastre_se" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

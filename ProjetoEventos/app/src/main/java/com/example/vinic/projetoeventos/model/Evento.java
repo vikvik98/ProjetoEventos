@@ -8,12 +8,20 @@ public class Evento {
     private String nome;
     private Date data;
     private String statusDoEvento;
+    private String local;
     private String descricao;
     private String tipoEvento;
     private List<Instituicao> instituicoes;
     private List<Atividade> atividades;
     private List<Tag> tags;
 
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
 
     public String getNome() {
         return nome;
