@@ -13,6 +13,7 @@ import android.view.View;
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.holder.FragmentEventos;
+import com.example.vinic.projetoeventos.holder.FragmentInscricao;
 import com.example.vinic.projetoeventos.holder.ViewPageAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPageAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentEventos(), "Eventos");
-        //adapter.addFragment(new AgendaFragment(), "Agenda");
+        adapter.addFragment(new FragmentInscricao(), "Inscrições");
         viewPager.setAdapter(adapter);
     }
 
