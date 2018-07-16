@@ -28,23 +28,26 @@ public class CadastroActivity extends AppCompatActivity {
 
     public void efetuarCadastro(View view) {
 
+        boolean existe = false;
+
         if (verificarCamposVazios()){
             for (int i = 0; i < LoginActivity.usuarios.size(); i++) {
 
                 if(LoginActivity.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
                     Toast.makeText(this, "Este email já está cadastrado", Toast.LENGTH_SHORT).show();
-                    break;
-                }else{
-                    if(editTextSenha.getText().toString().equals(editTextCoSenha.getText().toString())){
-                        realizarLogin();
-                        break;
-                    }else {
-                        Toast.makeText(this, "A senha não bate com a senha de confirmação", Toast.LENGTH_SHORT).show();
-                    }
+                    existe = true;
                 }
             }
 
-            if (LoginActivity.usuarios.size() == 0){
+            if (!existe){
+                if(editTextSenha.getText().toString().equals(editTextCoSenha.getText().toString())){
+                    realizarLogin();
+                }else {
+                    Toast.makeText(this, "A senha não bate com a senha de confirmação", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            else if (LoginActivity.usuarios.size() == 0){
                 realizarLogin();
             }
         }
