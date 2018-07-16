@@ -3,6 +3,7 @@ package com.example.vinic.projetoeventos.controller;
 import android.support.annotation.NonNull;
 import android.widget.EditText;
 
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -21,13 +22,15 @@ public class UsuarioController {
         String senhaUsuario = senha.getText().toString();
         String emailUsuario = email.getText().toString();
 
-        Usuario usuario = new Usuario(nomeUsuario,senhaUsuario,emailUsuario);
-
-        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().setValue(usuario);
+        UsuarioCases.cadastrarUsuario(nomeUsuario,senhaUsuario,emailUsuario);
 
     }
 
 
+    public static Usuario logarUsuario(EditText email){
+        String emailUsuario = email.getText().toString();
+        return UsuarioCases.logarUsuario(emailUsuario);
+    }
 
 
 
