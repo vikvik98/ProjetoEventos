@@ -12,6 +12,9 @@ public class Usuario {
     private List<Inscricao> inscricoes;
     private List<Evento> eventos;
 
+    public Usuario(){
+
+    }
 
     public Usuario(String nome, String senha, String email) {
         this.nome = nome;
