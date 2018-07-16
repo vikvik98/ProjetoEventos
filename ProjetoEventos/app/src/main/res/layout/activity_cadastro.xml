@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#0097A7"
+    tools:context="com.example.vinic.projetoeventos.app.CadastroActivity">
+
+
+    <EditText
+        android:layout_marginTop="50dp"
+        android:id="@+id/nome_cadastro"
+        android:hint="@string/nome"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/email_cadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/senha_cadastro"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/comfirmar_senha_cadastro"
+        android:hint="@string/repita_a_senha"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:text="@string/cadastrar"
+        android:id="@+id/btn_cadastrar"
+        android:onClick="efetuarCadastro"
+        android:backgroundTint="#B2DFDB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

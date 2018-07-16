@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">ProjetoEventos</string>
+    <string name="app_name">Event Facility</string>
+    <string name="n_o_tem_conta">Não tem conta?</string>
+    <string name="cadastre_se">Cadastre-se!</string>
+    <string name="digite_sua_senha">Digite sua senha</string>
+    <string name="digite_seu_email">Digite seu email</string>
+    <string name="entrar">entrar</string>
+    <string name="cadastrar">cadastrar</string>
+    <string name="repita_a_senha">Repita a senha</string>
+    <string name="senha">Senha</string>
+    <string name="email">Email</string>
+    <string name="nome">Nome</string>
 </resources>
