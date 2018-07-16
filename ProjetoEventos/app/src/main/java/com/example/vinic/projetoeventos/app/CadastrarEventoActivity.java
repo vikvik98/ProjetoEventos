@@ -1,5 +1,6 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,7 @@ public class CadastrarEventoActivity extends AppCompatActivity {
     }
 
     public void adicionarEvento(View view) {
+        startActivity(new Intent(this, CadastrarAtividadeActivity.class));
         if(!(editTextNomeEvento == null) && !(editTextDataEvento == null) && !(editTextTipoEvento == null)){
             UsuarioController.cadastrarEvento(editTextNomeEvento,editTextDataEvento,editTextTipoEvento);
         }
