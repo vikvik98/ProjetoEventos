@@ -22,6 +22,7 @@ public class Usuario {
         this.email = email;
     }
 
+
     public String getNome() {
         return nome;
     }

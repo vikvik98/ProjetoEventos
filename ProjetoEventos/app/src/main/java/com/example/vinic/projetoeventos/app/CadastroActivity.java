@@ -14,6 +14,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText editTextNome;
     private EditText editTextEmail;
     private EditText editTextSenha;
+    private EditText editTextCoSenha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +25,26 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void efetuarCadastro(View view) {
-        UsuarioController.cadastrarUsuario(editTextNome,editTextSenha,editTextEmail);
-        Toast.makeText(this, "Deu bom rapa!", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < LoginActivity.usuarios.size(); i++) {
+            if(LoginActivity.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
+                Toast.makeText(this, "Este email já está cadastrado", Toast.LENGTH_SHORT).show();
+                break;
+            }else{
+                if(editTextSenha.getText().toString().equals(editTextCoSenha.getText().toString())){
+                    UsuarioController.cadastrarUsuario(editTextNome,editTextSenha,editTextEmail);
+                    Toast.makeText(this, "Usuario cadastrado!", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(this, "A senha não bate com a senha de confirmação", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
     }
 
     private void setupViews() {
         editTextNome = findViewById(R.id.nome_cadastro);
         editTextEmail = findViewById(R.id.email_cadastro);
         editTextSenha = findViewById(R.id.senha_cadastro);
+        editTextCoSenha = findViewById(R.id.confirmar_senha_cadastro);
     }
 }
