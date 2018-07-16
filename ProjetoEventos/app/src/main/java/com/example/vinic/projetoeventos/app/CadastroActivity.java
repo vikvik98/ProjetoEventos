@@ -28,6 +28,7 @@ public class CadastroActivity extends AppCompatActivity {
         for (int i = 0; i < LoginActivity.usuarios.size(); i++) {
             if(LoginActivity.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
                 Toast.makeText(this, "Este email já está cadastrado", Toast.LENGTH_SHORT).show();
+                break;
             }else{
                 if(editTextSenha.getText().toString().equals(editTextCoSenha.getText().toString())){
                     UsuarioController.cadastrarUsuario(editTextNome,editTextSenha,editTextEmail);

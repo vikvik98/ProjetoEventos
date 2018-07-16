@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void pegarUsuariosNoFirebase(){
+        usuarios.clear();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
