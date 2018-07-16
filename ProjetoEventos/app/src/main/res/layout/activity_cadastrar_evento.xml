@@ -44,6 +44,7 @@
 
 
     <EditText
+        android:id="@+id/add_tipo_evento"
         android:layout_marginTop="4dp"
         android:background="@drawable/edit_text_mod"
         android:layout_width="match_parent"

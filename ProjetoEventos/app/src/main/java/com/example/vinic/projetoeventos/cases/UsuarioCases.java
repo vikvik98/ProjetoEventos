@@ -3,7 +3,12 @@ package com.example.vinic.projetoeventos.cases;
 
 import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
+import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Usuario;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UsuarioCases {
 
@@ -23,6 +28,19 @@ public class UsuarioCases {
             }
         }
         return null;
+    }
+
+    public static boolean cadastrarEvento(String nome, String data, String local){
+        Date dataFormatada = null;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+        try {
+            dataFormatada = format.parse(data);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Evento evento = new Evento(nome,dataFormatada,local);
+        LoginActivity.usuario.getEventos().add(evento);
+        return true;
     }
 
 }
