@@ -10,4 +10,10 @@
     <string name="senha">Senha</string>
     <string name="email">Email</string>
     <string name="nome">Nome</string>
+    <string name="adicionar_evento">Adicionar evento</string>
+    <string name="tipo_do_evento">Tipo do evento</string>
+    <string name="local_do_evento">Local do evento</string>
+    <string name="inicio_termino_11_00_22_00">Inicio/Termino (11:00/22:00)</string>
+    <string name="nome_do_evento">Nome do evento</string>
+    <string name="dd_mm_aaaa">DD-MM-AAAA</string>
 </resources>

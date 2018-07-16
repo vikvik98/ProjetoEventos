@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Evento {
 
+    private Usuario criador;
     private String nome;
     private Date data;
     private String statusDoEvento;
@@ -85,5 +86,13 @@ public class Evento {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public Usuario getCriador() {
+        return criador;
+    }
+
+    public void setCriador(Usuario criador) {
+        this.criador = criador;
     }
 }
