@@ -20,10 +20,12 @@ public class Evento {
     }
 
 
-    public Evento(String nome, Date data, String local) {
+    public Evento(String nome, Date data, String local, String tipoEvento) {
         this.nome = nome;
         this.data = data;
         this.local = local;
+        this.tipoEvento = tipoEvento;
+        this.statusDoEvento = "Aberto";
     }
 
 

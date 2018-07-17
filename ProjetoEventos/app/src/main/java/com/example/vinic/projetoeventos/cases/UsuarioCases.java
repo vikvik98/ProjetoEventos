@@ -9,14 +9,20 @@ import com.example.vinic.projetoeventos.model.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UsuarioCases {
 
 
     public static Boolean cadastrarUsuario(String nome, String senha, String email){
-        Usuario usuario = new Usuario(nome,senha,email);
+        String key = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
+        Usuario usuario = new Usuario(key,nome,senha,email);
+        Map<String, Object> usuarioValues = usuario.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/usuarios/" + key,usuarioValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
         LoginActivity.usuario = usuario;
-        ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().setValue(usuario);
         return true;
 
     }
@@ -30,7 +36,7 @@ public class UsuarioCases {
         return null;
     }
 
-    public static boolean cadastrarEvento(String nome, String data, String local){
+    public static boolean cadastrarEvento(String nome,String data, String local,String tipoEvento){
         Date dataFormatada = null;
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
         try {
@@ -38,8 +44,12 @@ public class UsuarioCases {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        Evento evento = new Evento(nome,dataFormatada,local);
+        Evento evento = new Evento(nome,dataFormatada,local,tipoEvento);
         LoginActivity.usuario.getEventos().add(evento);
+        Map<String, Object> usuarioValues = LoginActivity.usuario.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/usuarios/" + LoginActivity.usuario.getId(),usuarioValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
         return true;
     }
 

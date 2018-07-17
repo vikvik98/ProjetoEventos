@@ -21,24 +21,16 @@
             android:layout_height="wrap_content"
             android:hint="@string/nome_do_evento"/>
 
-
-        <EditText
+        <TextView
             android:id="@+id/add_data_evento"
             android:textSize="15sp"
             android:background="@drawable/edit_text_mod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/dd_mm_aaaa"/>
+            android:text="@string/dd_mm_aaaa"
+            android:onClick="pegarDataEvento"/>
 
 
-        <EditText
-            android:id="@+id/inicio_termino_evento"
-            android:background="@drawable/edit_text_mod"
-            android:layout_marginTop="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/inicio_termino_11_00_22_00"
-            android:textSize="17sp" />
 
         <EditText
             android:id="@+id/add_local_evento"

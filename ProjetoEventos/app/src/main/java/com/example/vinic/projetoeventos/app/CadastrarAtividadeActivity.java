@@ -9,7 +9,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
 import com.example.vinic.projetoeventos.R;
 
 import java.text.SimpleDateFormat;
