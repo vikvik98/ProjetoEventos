@@ -1,19 +1,27 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.controller.UsuarioController;
 
+import java.util.Calendar;
+
 public class CadastrarEventoActivity extends AppCompatActivity {
 
     private EditText editTextNomeEvento;
-    private EditText editTextDataEvento;
+    private TextView textViewData;
+    private EditText editTextLocal;
     private EditText editTextTipoEvento;
+    private Calendar dataEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +31,43 @@ public class CadastrarEventoActivity extends AppCompatActivity {
     }
 
     public void adicionarEvento(View view) {
-        startActivity(new Intent(this, CadastrarAtividadeActivity.class));
-        if(!(editTextNomeEvento == null) && !(editTextDataEvento == null) && !(editTextTipoEvento == null)){
-            UsuarioController.cadastrarEvento(editTextNomeEvento,editTextDataEvento,editTextTipoEvento);
+        if(!(editTextNomeEvento.getText().toString().equals("")) &&
+                !(editTextLocal).getText().toString().equals("") &&
+                !(editTextTipoEvento.getText().toString().equals(""))){
+
+            UsuarioController.cadastrarEvento(editTextNomeEvento,textViewData,editTextLocal,editTextTipoEvento);
+            finish();
+        }else{
+            Toast.makeText(this, "Algum campo está vazio!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void setupViews() {
         editTextNomeEvento = findViewById(R.id.add_nome_evento);
-        editTextDataEvento = findViewById(R.id.add_data_evento);
+        textViewData = findViewById(R.id.add_data_evento);
+        editTextLocal = findViewById(R.id.add_local_evento);
         editTextTipoEvento = findViewById(R.id.add_tipo_evento);
+
+        dataEvento = Calendar.getInstance();
     }
 
+    public void pegarDataEvento(View view) {
+        new DatePickerDialog(this,date,dataEvento.get(Calendar.YEAR),dataEvento.get(Calendar.MONTH),dataEvento.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            dataEvento.set(Calendar.YEAR, year);
+            dataEvento.set(Calendar.MONTH, monthOfYear);
+            dataEvento.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            textViewData.setText(dataEvento.get(Calendar.DAY_OF_MONTH) + "/" + dataEvento.get(Calendar.MONTH) + "/" + dataEvento.get(Calendar.YEAR));
+
+
+
+        }
+
+    };
 }

@@ -2,6 +2,7 @@ package com.example.vinic.projetoeventos.controller;
 
 import android.support.annotation.NonNull;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
@@ -37,11 +38,12 @@ public class UsuarioController {
     }
 
 
-    public static void cadastrarEvento(EditText nome, EditText data, EditText local){
+    public static void cadastrarEvento(EditText nome, TextView data, EditText local, EditText tipo){
         String nomeEvento = nome.getText().toString();
         String dataEvento = data.getText().toString();
         String localEvento = local.getText().toString();
-        UsuarioCases.cadastrarEvento(nomeEvento,dataEvento,localEvento);
+        String tipoEvento = tipo.getText().toString();
+        UsuarioCases.cadastrarEvento(nomeEvento,dataEvento,localEvento,tipoEvento);
     }
 
 
