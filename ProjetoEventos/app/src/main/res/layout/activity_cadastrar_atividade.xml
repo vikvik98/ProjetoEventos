@@ -14,6 +14,7 @@
 
 
         <EditText
+            android:id="@+id/nome_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
@@ -53,21 +54,25 @@
             android:textSize="18sp"/>
 
         <RadioGroup
+            android:id="@+id/group_tipo_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rb_palestra_atividade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Palestra"/>
 
             <RadioButton
+                android:id="@+id/rb_minicurso_atividade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Minicurso"/>
 
             <RadioButton
+                android:id="@+id/rb_mesa_redonda_atividade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mesa Redonda"/>
@@ -75,6 +80,7 @@
         </RadioGroup>
 
         <EditText
+            android:id="@+id/descricao_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
@@ -82,6 +88,7 @@
             android:hint="Descrição"/>
 
         <EditText
+            android:id="@+id/valor_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
@@ -90,6 +97,7 @@
             android:inputType="number"/>
 
         <Button
+            android:id="@+id/bt_add_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
