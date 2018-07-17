@@ -15,7 +15,9 @@ import java.util.Calendar;
 
 public class CadastrarAtividadeActivity extends AppCompatActivity {
 
-    public TextView dataEvento;
+    private TextView dataEvento;
+    private Calendar myCalendar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_atividade);
 
         dataEvento = findViewById(R.id.data_evento);
+        myCalendar = Calendar.getInstance();
     }
 
     @Override
@@ -31,8 +34,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
 
 
     }
-
-    Calendar myCalendar = Calendar.getInstance();
 
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
