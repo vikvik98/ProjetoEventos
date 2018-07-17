@@ -1,11 +1,15 @@
 package com.example.vinic.projetoeventos.model;
 
 
+import com.google.firebase.database.Exclude;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Usuario {
-
+    private String id;
     private String nome;
     private String senha;
     private String email;
@@ -17,7 +21,8 @@ public class Usuario {
 
     }
 
-    public Usuario(String nome, String senha, String email) {
+    public Usuario(String id,String nome, String senha, String email) {
+        this.id = id;
         this.nome = nome;
         this.senha = senha;
         this.email = email;
@@ -73,6 +78,26 @@ public class Usuario {
 
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Exclude
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("id", id);
+        result.put("nome", nome);
+        result.put("senha", senha);
+        result.put("email", email);
+        result.put("eventos", eventos);
+
+        return result;
     }
 
 }
