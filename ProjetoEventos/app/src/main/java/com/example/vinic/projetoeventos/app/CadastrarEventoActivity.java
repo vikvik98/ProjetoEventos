@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.controller.UsuarioController;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CadastrarEventoActivity extends AppCompatActivity {
@@ -52,22 +53,20 @@ public class CadastrarEventoActivity extends AppCompatActivity {
     }
 
     public void pegarDataEvento(View view) {
-        new DatePickerDialog(this,date,dataEvento.get(Calendar.YEAR),dataEvento.get(Calendar.MONTH),dataEvento.get(Calendar.DAY_OF_MONTH)).show();
+        int ano = dataEvento.get(Calendar.YEAR);
+        int mes = dataEvento.get(Calendar.MONTH);
+        int dia = dataEvento.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (datePicker, i, i1, i2) -> {
+                    dataEvento.set(i, i1, i2);
+                    textViewData.setText(new SimpleDateFormat("dd/MM/yyyy")
+                            .format(dataEvento.getTime()));
+                }, ano, mes, dia);
+
+        /** Definir data mínima a ser escolhida sendo a data atual */
+        datePickerDialog.getDatePicker().setMinDate(dataEvento.getTimeInMillis());
+        datePickerDialog.show();
     }
 
-    DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear,
-                              int dayOfMonth) {
-            dataEvento.set(Calendar.YEAR, year);
-            dataEvento.set(Calendar.MONTH, monthOfYear);
-            dataEvento.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-            textViewData.setText(dataEvento.get(Calendar.DAY_OF_MONTH) + "/" + dataEvento.get(Calendar.MONTH) + "/" + dataEvento.get(Calendar.YEAR));
-
-
-
-        }
-
-    };
 }

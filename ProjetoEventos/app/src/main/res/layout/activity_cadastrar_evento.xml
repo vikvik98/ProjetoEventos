@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="70dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.CadastrarEventoActivity"
-    android:orientation="vertical" >
+    tools:context=".app.CadastrarEventoActivity">
 
-    <EditText
-        android:id="@+id/add_nome_evento"
-        android:background="@drawable/edit_text_mod"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/nome_do_evento"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/add_data_evento"
-        android:textSize="15sp"
-        android:background="@drawable/edit_text_mod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dd_mm_aaaa"
-        android:onClick="pegarDataEvento"/>
+        <EditText
+            android:id="@+id/add_nome_evento"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nome_do_evento"/>
+
+        <TextView
+            android:id="@+id/add_data_evento"
+            android:textSize="15sp"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dd_mm_aaaa"
+            android:onClick="pegarDataEvento"/>
 
 
-    <EditText
-        android:id="@+id/add_local_evento"
-        android:background="@drawable/edit_text_mod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/local_do_evento"/>
+
+        <EditText
+            android:id="@+id/add_local_evento"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/local_do_evento"/>
 
 
-    <EditText
-        android:id="@+id/add_tipo_evento"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/edit_text_mod"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/tipo_do_evento" />
+        <EditText
+            android:id="@+id/add_tipo_evento"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/tipo_do_evento" />
 
-    <Button
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edit_text_mod"
-        android:text="@string/adicionar_evento"
-        android:onClick="adicionarEvento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <Button
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edit_text_mod"
+            android:text="@string/adicionar_evento"
+            android:onClick="adicionarEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-</LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

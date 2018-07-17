@@ -25,6 +25,7 @@ public class Evento {
         this.data = data;
         this.local = local;
         this.tipoEvento = tipoEvento;
+        this.statusDoEvento = "Aberto";
     }
 
 
