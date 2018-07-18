@@ -3,7 +3,7 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="70dp"
+    android:layout_margin="40dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.CadastrarEventoActivity">
@@ -15,6 +15,7 @@
 
 
         <EditText
+            android:inputType="textPersonName"
             android:id="@+id/add_nome_evento"
             android:background="@drawable/edit_text_mod"
             android:layout_width="match_parent"
@@ -22,15 +23,38 @@
             android:hint="@string/nome_do_evento"/>
 
         <TextView
-            android:id="@+id/add_data_evento"
-            android:textSize="15sp"
-            android:background="@drawable/edit_text_mod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dd_mm_aaaa"
-            android:onClick="pegarDataEvento"/>
+            android:gravity="center"
+            android:text="Data Inicio / Data Termino"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/add_data_inicio_evento"
+                android:textSize="15sp"
+                android:background="@drawable/edit_text_mod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dd_mm_aaaa"
+                android:onClick="pegarDataEvento"/>
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/add_data_termino_evento"
+                android:textSize="15sp"
+                android:background="@drawable/edit_text_mod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dd_mm_aaaa"
+                android:onClick="pegarDataEvento"/>
 
 
+        </LinearLayout>
 
         <EditText
             android:id="@+id/add_local_evento"
@@ -48,8 +72,16 @@
             android:layout_height="wrap_content"
             android:hint="@string/tipo_do_evento" />
 
+        <EditText
+            android:id="@+id/add_quant_pessoas_evento"
+            android:background="@drawable/edit_text_mod"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/maximo_de_inscritos"/>
+
         <Button
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/edit_text_mod"
             android:text="@string/adicionar_evento"
             android:onClick="adicionarEvento"

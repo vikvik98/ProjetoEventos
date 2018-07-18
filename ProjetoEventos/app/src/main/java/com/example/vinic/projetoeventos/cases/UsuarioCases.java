@@ -16,11 +16,11 @@ public class UsuarioCases {
 
 
     public static Boolean cadastrarUsuario(String nome, String senha, String email){
-        String key = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
-        Usuario usuario = new Usuario(key,nome,senha,email);
+        String keyUser = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
+        Usuario usuario = new Usuario(keyUser,nome,senha,email);
         Map<String, Object> usuarioValues = usuario.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/usuarios/" + key,usuarioValues);
+        childUpdates.put("/usuarios/" + keyUser,usuarioValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
         LoginActivity.usuario = usuario;
         return true;
@@ -36,19 +36,12 @@ public class UsuarioCases {
         return null;
     }
 
-    public static boolean cadastrarEvento(String nome,String data, String local,String tipoEvento){
-        Date dataFormatada = null;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
-        try {
-            dataFormatada = format.parse(data);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Evento evento = new Evento(nome,dataFormatada,local,tipoEvento);
-        LoginActivity.usuario.getEventos().add(evento);
-        Map<String, Object> usuarioValues = LoginActivity.usuario.toMap();
+    public static boolean cadastrarEvento(String nome, String tipo, String local, Date dataInicio, Date dataFinal, int quant, String key){
+        String keyEvent = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
+        Evento evento = new Evento(keyEvent,nome,tipo,local,dataInicio,dataFinal,quant,key);
+        Map<String, Object> usuarioValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/usuarios/" + LoginActivity.usuario.getId(),usuarioValues);
+        childUpdates.put("/eventos/" + keyEvent,usuarioValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
         return true;
     }

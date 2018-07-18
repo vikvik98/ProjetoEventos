@@ -4,12 +4,15 @@ import android.support.annotation.NonNull;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,12 +41,23 @@ public class UsuarioController {
     }
 
 
-    public static void cadastrarEvento(EditText nome, TextView data, EditText local, EditText tipo){
+    public static void cadastrarEvento(EditText nome, EditText tipo, EditText local, TextView dataInicio, TextView dataFinal, EditText quant){
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+
         String nomeEvento = nome.getText().toString();
-        String dataEvento = data.getText().toString();
-        String localEvento = local.getText().toString();
         String tipoEvento = tipo.getText().toString();
-        UsuarioCases.cadastrarEvento(nomeEvento,dataEvento,localEvento,tipoEvento);
+        String localEvento = local.getText().toString();
+        int quantPessoas = Integer.parseInt(quant.getText().toString());
+
+        try {
+            Date dataEventoInicio = format.parse(dataInicio.getText().toString());
+            Date dataEventoFinal = format.parse(dataFinal.getText().toString());
+            UsuarioCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, LoginActivity.usuario.getId());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
