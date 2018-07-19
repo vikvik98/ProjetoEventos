@@ -4,6 +4,7 @@ package com.example.vinic.projetoeventos.cases;
 import android.support.annotation.NonNull;
 
 import com.example.vinic.projetoeventos.app.LoginActivity;
+import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Usuario;
@@ -24,7 +25,7 @@ public class UsuarioCases {
 
     public static List<Usuario> usuarios;
     public static DatabaseReference databaseReference = ConfiguracaoFirebase.getDatabaseReference().child("usuarios");
-    public static Usuario usuarioLogado;
+
 
     public static Boolean cadastrarUsuario(String nome, String senha, String email){
         String keyUser = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
@@ -33,7 +34,7 @@ public class UsuarioCases {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/usuarios/" + keyUser,usuarioValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
-        usuarioLogado = usuario;
+        MainActivity.usuarioLogado = usuario;
         return true;
 
     }

@@ -4,6 +4,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.app.LoginActivity;
+import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
 
@@ -24,7 +25,7 @@ public class EventoController {
         try {
             Date dataEventoInicio = format.parse(dataInicio.getText().toString());
             Date dataEventoFinal = format.parse(dataFinal.getText().toString());
-            EventoCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, UsuarioCases.usuarioLogado.getId());
+            EventoCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, MainActivity.usuarioLogado.getId());
         } catch (ParseException e) {
             e.printStackTrace();
         }

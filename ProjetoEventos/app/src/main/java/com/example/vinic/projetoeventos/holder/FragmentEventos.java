@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.LoginActivity;
+import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
 
 
@@ -39,7 +40,7 @@ public class FragmentEventos extends android.support.v4.app.Fragment{
 
     private void reloadData() {
 
-        adapter = new EventosAdapter(getActivity(), UsuarioCases.usuarioLogado.getEventos());
+        adapter = new EventosAdapter(getActivity(), MainActivity.usuarioLogado.getEventos());
         rvEventos.setAdapter(adapter);
         rvEventos.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvEventos.setHasFixedSize(true);

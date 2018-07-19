@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void realizarLogin() {
-        UsuarioCases.usuarioLogado = UsuarioController.logarUsuario(editTextEmail);
+        MainActivity.usuarioLogado = UsuarioController.logarUsuario(editTextEmail);
         Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         finish();
