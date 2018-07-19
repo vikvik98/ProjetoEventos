@@ -45,7 +45,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         holder.textViewNomeEvento.setText(evento.getNome());
         holder.textViewStatusEvento.setText(evento.getStatusDoEvento());
         holder.textViewLocalEvento.setText(evento.getLocal());
-        holder.textViewDataEvento.setText(new SimpleDateFormat("dd/MM/yyyy").format(evento.getDataInicial()));
+        //holder.textViewDataEvento.setText(new SimpleDateFormat("dd/MM/yyyy").format(evento.getDataInicial()));
     }
 
 

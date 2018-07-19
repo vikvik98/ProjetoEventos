@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.holder.FragmentEventos;
 import com.example.vinic.projetoeventos.holder.FragmentInscricao;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     @Override
@@ -35,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         ViewPager viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
-
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
+        EventoCases.pegarEventosNoFirebase();
     }
 
     public void novoEvento(View view) {

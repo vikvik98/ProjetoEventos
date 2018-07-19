@@ -24,18 +24,16 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
 
     private RecyclerView rvEventos;
     private EventosAdapter adapter;
-    private EventoCases eventoCases;
     private static View view;
     private List<Evento> meusEventos;
-    private List<Evento> eventosList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_meus_eventos, container, false);
-
         setupViews();
-
+        reloadData();
         return view;
     }
 
@@ -54,12 +52,12 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
     }
 
     private List<Evento> pegarMeusEventos(Usuario usuarioLogado){
-        eventosList = eventoCases.pegarEventosNoFirebase();
+        meusEventos.clear();
         //Log.d("certo","" + eventosList.size());
-        for (int i = 0; i < eventosList.size(); i++){
+        for (int i = 0; i < EventoCases.eventosList.size(); i++){
             //Log.d("certo",eventosList.get(i).getKeyCriador() + "id: " + usuarioLogado.getId());
-            if (eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                meusEventos.add(eventosList.get(i));
+            if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
+                meusEventos.add(EventoCases.eventosList.get(i));
                 //Log.d("certo", "Adicionou");
             }
         }
@@ -69,9 +67,7 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
 
     private void setupViews() {
         rvEventos = view.findViewById(R.id.rv_eventos);
-        eventosList = new ArrayList<>();
         meusEventos = new ArrayList<>();
-        eventoCases = new EventoCases();
     }
 
 }
