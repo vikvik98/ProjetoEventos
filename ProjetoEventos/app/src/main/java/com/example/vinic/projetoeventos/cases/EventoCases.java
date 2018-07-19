@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
+import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,12 +22,23 @@ public class EventoCases {
     public static List<Evento> eventosList;
     public static DatabaseReference databaseReferenceEvento = ConfiguracaoFirebase.getDatabaseReference().child("eventos");
 
+    public static void cadastrarAtividade(Evento evento,String nome,String tipoAtividade,String horaInicio,String horaTermino,double valor){
+        String keyEvent = evento.getId();
+        Atividade atividade = new Atividade(nome,tipoAtividade,horaInicio,horaTermino,valor);
+        evento.getAtividades().add(atividade);
+        Map<String, Object> eventoValues = evento.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/eventos/" + keyEvent,eventoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+
+    }
+
     public static boolean cadastrarEvento(String nome, String tipo, String local, Date dataInicio, Date dataFinal, int quant, String key){
         String keyEvent = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
         Evento evento = new Evento(keyEvent,nome,tipo,local,dataInicio,dataFinal,quant,key);
-        Map<String, Object> usuarioValues = evento.toMap();
+        Map<String, Object> eventoValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/eventos/" + keyEvent,usuarioValues);
+        childUpdates.put("/eventos/" + keyEvent,eventoValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
         return true;
     }

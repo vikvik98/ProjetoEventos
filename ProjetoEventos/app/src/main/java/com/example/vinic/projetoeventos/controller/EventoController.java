@@ -7,6 +7,7 @@ import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
+import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,17 @@ public class EventoController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
+    }
+
+    public static void cadastrarAtividade(Evento evento, EditText nome, EditText tipo, EditText horaInicio,EditText horaTermino, EditText valor){
+        String nomeAtividade = nome.getText().toString();
+        String tipoAtividade = tipo.getText().toString();
+        String horaInicioAtividade = horaInicio.getText().toString();
+        String horaTerminoAtivade = horaTermino.getText().toString();
+        double valorAtividade = Double.parseDouble(valor.getText().toString());
+        EventoCases.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
 
 
     }

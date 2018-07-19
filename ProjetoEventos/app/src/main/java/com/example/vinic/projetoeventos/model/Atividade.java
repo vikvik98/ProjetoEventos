@@ -4,12 +4,23 @@ import java.util.Date;
 
 public class Atividade {
 
-    private String tipoAtividade;
     private String nome;
-    private Date data;
-    private String descricao;
+    private String tipoAtividade;
+    private String horaInicio;
+    private String horaTermino;
     private double valor;
 
+    public Atividade() {
+    }
+
+
+    public Atividade(String nome, String tipoAtividade,String horaInicio, String horaTermino, double valor) {
+        this.nome = nome;
+        this.tipoAtividade = tipoAtividade;
+        this.horaInicio = horaInicio;
+        this.horaTermino = horaTermino;
+        this.valor = valor;
+    }
 
     public String getTipoAtividade() {
         return tipoAtividade;
@@ -27,20 +38,20 @@ public class Atividade {
         this.nome = nome;
     }
 
-    public Date getData() {
-        return data;
+    public String getHoraInicio() {
+        return horaInicio;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getHoraTermino() {
+        return horaTermino;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setHoraTermino(String horaTermino) {
+        this.horaTermino = horaTermino;
     }
 
     public double getValor() {
