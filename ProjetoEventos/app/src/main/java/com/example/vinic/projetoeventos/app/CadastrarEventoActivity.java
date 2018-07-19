@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.controller.EventoController;
 import com.example.vinic.projetoeventos.controller.UsuarioController;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +36,7 @@ public class CadastrarEventoActivity extends AppCompatActivity {
 
     public void adicionarEvento(View view) {
         if (camposVazios(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas)){
-            UsuarioController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
+            EventoController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
             finish();
         }else{
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();

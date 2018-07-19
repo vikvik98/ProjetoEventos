@@ -41,24 +41,7 @@ public class UsuarioController {
     }
 
 
-    public static void cadastrarEvento(EditText nome, EditText tipo, EditText local, TextView dataInicio, TextView dataFinal, EditText quant){
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
 
-        String nomeEvento = nome.getText().toString();
-        String tipoEvento = tipo.getText().toString();
-        String localEvento = local.getText().toString();
-        int quantPessoas = Integer.parseInt(quant.getText().toString());
-
-        try {
-            Date dataEventoInicio = format.parse(dataInicio.getText().toString());
-            Date dataEventoFinal = format.parse(dataFinal.getText().toString());
-            UsuarioCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, LoginActivity.usuario.getId());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-    }
 
 
 
