@@ -70,15 +70,6 @@
             android:hint="Tipo de atividade"/>
 
 
-
-        <EditText
-            android:id="@+id/descricao_atividade"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_mod"
-            android:layout_marginTop="4dp"
-            android:hint="@string/descri_o"/>
-
         <EditText
             android:id="@+id/valor_atividade"
             android:layout_width="match_parent"
@@ -94,7 +85,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
             android:layout_marginTop="4dp"
-            android:onClick="adicionarEvento"
+            android:onClick="adicionarAtividade"
             android:text="@string/adicionar_atividade"/>
 
     </LinearLayout>

@@ -23,7 +23,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
     private EditText nome;
     private TextView txtDataAtividade;
     private EditText tipo;
-    private EditText descricao;
     private EditText valor;
     private Calendar dataAtividade;
     private EditText horaInicio;
@@ -71,7 +70,6 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
         nome = findViewById(R.id.nome_atividade);
         txtDataAtividade = findViewById(R.id.data_evento);
         tipo = findViewById(R.id.add_tipo_atividade);
-        descricao = findViewById(R.id.descricao_atividade);
         valor = findViewById(R.id.valor_atividade);
         dataAtividade = Calendar.getInstance();
         horaInicio = findViewById(R.id.add_hora_inicio);
@@ -79,8 +77,8 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
     }
 
 
-    public void adicionarEvento(View view) {
-        if(camposVazios(nome, txtDataAtividade, descricao, valor, horaInicio, horaFinal)){
+    public void adicionarAtividade(View view) {
+        if(camposVazios(nome, txtDataAtividade, valor, horaInicio, horaFinal)){
             Toast.makeText(this, R.string.preencher_campos, Toast.LENGTH_SHORT).show();
         }else{
             Log.d("msg", idEvento);
@@ -88,16 +86,16 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
                 Log.d("msg", "" + EventoCases.eventosList.get(i));
                 if(EventoCases.eventosList.get(i).getId().equals(idEvento)){
                     EventoController.cadastrarAtividade(EventoCases.eventosList.get(i), nome, tipo, horaInicio, horaFinal, valor);
-                    break;
+                    Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             }
         }
     }
 
-    public boolean camposVazios(EditText nome, TextView data, EditText descricao, EditText valor, EditText horaInicio, EditText horaFinal){
+    public boolean camposVazios(EditText nome, TextView data, EditText valor, EditText horaInicio, EditText horaFinal){
         if (nome.getText().toString().trim().equals("")
                 || data.getText().toString().trim().equals("DD/MM/YYYY")
-                || descricao.getText().toString().trim().equals("")
                 || valor.getText().toString().trim().equals("")
                 || horaInicio.getText().toString().trim().equals("")
                 || horaFinal.getText().toString().trim().equals("")){
