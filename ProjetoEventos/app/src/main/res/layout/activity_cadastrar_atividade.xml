@@ -20,7 +20,7 @@
             android:background="@drawable/edit_text_mod"
             android:layout_marginTop="4dp"
             android:inputType="text"
-            android:hint="Nome"/>
+            android:hint="@string/nome"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +32,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Data: "
+                android:layout_weight="1"
+                android:text="@string/data"
                 android:textSize="18sp"
                 />
 
@@ -40,9 +41,33 @@
                 android:id="@+id/data_evento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="6"
                 android:text="DD/MM/AAAA"
                 android:textSize="18sp"
                 android:onClick="pegarData"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_mod"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/hora_de_inicio"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/add_hora_inicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textSize="18sp"
+                android:text="00:00"
+                android:onClick="pegarHora"/>
         </LinearLayout>
 
 
@@ -50,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Tipo de atividade:"
+            android:text="@string/tipo_de_atividade"
             android:textSize="18sp"/>
 
         <RadioGroup
@@ -63,19 +88,19 @@
                 android:id="@+id/rb_palestra_atividade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Palestra"/>
+                android:text="@string/palestra"/>
 
             <RadioButton
                 android:id="@+id/rb_minicurso_atividade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Minicurso"/>
+                android:text="@string/minicurso"/>
 
             <RadioButton
                 android:id="@+id/rb_mesa_redonda_atividade"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mesa Redonda"/>
+                android:text="@string/mesa_redonda"/>
 
         </RadioGroup>
 
@@ -85,7 +110,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
             android:layout_marginTop="4dp"
-            android:hint="Descrição"/>
+            android:hint="@string/descri_o"/>
 
         <EditText
             android:id="@+id/valor_atividade"
@@ -93,7 +118,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
             android:layout_marginTop="4dp"
-            android:hint="Valor"
+            android:hint="@string/valor"
             android:inputType="number"/>
 
         <Button
@@ -102,7 +127,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
             android:layout_marginTop="4dp"
-            android:text="Adicionar Atividade"/>
+            android:text="@string/adicionar_atividade"/>
+
     </LinearLayout>
 
 

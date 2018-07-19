@@ -1,6 +1,7 @@
 package com.example.vinic.projetoeventos.app;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -33,12 +34,13 @@ public class CadastrarEventoActivity extends AppCompatActivity {
     }
 
     public void adicionarEvento(View view) {
-        if (camposVazios(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas)){
-            EventoController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
-            finish();
-        }else{
-            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
-        }
+        startActivity(new Intent(this, CadastrarAtividadeActivity.class));
+//        if (camposVazios(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas)){
+//            EventoController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
+//            finish();
+//        }else{
+//            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private boolean camposVazios(EditText editTextNomeEvento,EditText editTextLocal,
