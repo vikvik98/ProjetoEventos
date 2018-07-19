@@ -1,11 +1,9 @@
 package com.example.vinic.projetoeventos.app;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +66,7 @@ public class CadastrarEventoActivity extends AppCompatActivity {
     }
 
 
-    public void pegarDataEvento(View view) {
+    public void pegarData(View view) {
 
         int ano = dataEvento.get(Calendar.YEAR);
         int mes = dataEvento.get(Calendar.MONTH);
@@ -87,8 +85,15 @@ public class CadastrarEventoActivity extends AppCompatActivity {
                 }, ano, mes, dia);
 
         /** Definir data mínima a ser escolhida sendo a data atual */
-        datePickerDialog.getDatePicker().setMinDate(dataEvento.getTimeInMillis());
+        if(R.id.add_data_inicio_evento == view.getId()){
+            datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        }
+        else{
+            datePickerDialog.getDatePicker().setMinDate(dataEvento.getTimeInMillis());
+        }
+
         datePickerDialog.show();
     }
+
 
 }

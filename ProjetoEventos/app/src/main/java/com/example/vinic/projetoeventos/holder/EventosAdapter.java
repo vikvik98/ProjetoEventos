@@ -13,7 +13,9 @@ import com.example.vinic.projetoeventos.model.Evento;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHolder> {
 
@@ -46,7 +48,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
         holder.textViewNomeEvento.setText(evento.getNome());
         holder.textViewStatusEvento.setText(evento.getStatusDoEvento());
         holder.textViewLocalEvento.setText(evento.getLocal());
-        holder.textViewDataEvento.setText(evento.getDataInicial().toString());
+        holder.textViewDataEvento.setText(new SimpleDateFormat("dd/MM/yyyy").format(evento.getDataInicial()));
     }
 
 
