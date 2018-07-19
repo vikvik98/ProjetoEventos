@@ -52,10 +52,11 @@ public class UsuarioCases {
     //TODO: perguntar para o prof se faz mais sentido retornar uma lista de usuarios ou colocar dentro de um atributo.
     public static void pegarUsuariosNoFirebase(){
         usuarios = new ArrayList<>();
-        usuarios.clear();
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                usuarios.clear();
                 for (DataSnapshot postSnapsshot : dataSnapshot.getChildren()){
                     Usuario user = postSnapsshot.getValue(Usuario.class);
                     usuarios.add(user);
