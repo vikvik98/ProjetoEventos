@@ -49,6 +49,7 @@ public class UsuarioCases {
     }
 
 
+    //TODO: perguntar para o prof se faz mais sentido retornar uma lista de usuarios ou colocar dentro de um atributo.
     public static void pegarUsuariosNoFirebase(){
         usuarios = new ArrayList<>();
         usuarios.clear();
