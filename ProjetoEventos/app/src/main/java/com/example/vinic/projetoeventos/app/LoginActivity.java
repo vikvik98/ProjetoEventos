@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.controller.UsuarioController;
 

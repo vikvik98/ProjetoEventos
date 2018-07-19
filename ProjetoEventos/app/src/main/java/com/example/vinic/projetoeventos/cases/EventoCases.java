@@ -7,6 +7,7 @@ import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ import java.util.Map;
 
 public class EventoCases {
 
-    private List<Evento> eventosList;
+    public static List<Evento> eventosList;
+    public static DatabaseReference databaseReferenceEvento = ConfiguracaoFirebase.getDatabaseReference().child("eventos");
 
     public static boolean cadastrarEvento(String nome, String tipo, String local, Date dataInicio, Date dataFinal, int quant, String key){
         String keyEvent = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
@@ -30,10 +32,10 @@ public class EventoCases {
     }
 
 
-    public List<Evento> pegarEventosNoFirebase(){
+    public static void pegarEventosNoFirebase(){
         eventosList = new ArrayList<>();
         eventosList.clear();
-        ConfiguracaoFirebase.getDatabaseReference().child("eventos").addValueEventListener(new ValueEventListener() {
+        databaseReferenceEvento.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot postSnapsshot : dataSnapshot.getChildren()){
@@ -48,7 +50,6 @@ public class EventoCases {
             }
         });
         Log.d("certo" , ""  + eventosList.size() + "ruim");
-        return eventosList;
     }
 
 }
