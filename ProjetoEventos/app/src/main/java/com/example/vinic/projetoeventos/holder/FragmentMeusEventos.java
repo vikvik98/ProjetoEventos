@@ -30,20 +30,14 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_meus_eventos, container, false);
         setupViews();
         reloadData();
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        reloadData();
-    }
-
     private void reloadData() {
+
 
         adapter = new EventosAdapter(getContext(), pegarMeusEventos(MainActivity.usuarioLogado));
         rvEventos.setAdapter(adapter);
@@ -52,16 +46,14 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
     }
 
     private List<Evento> pegarMeusEventos(Usuario usuarioLogado){
-        meusEventos.clear();
-        //Log.d("certo","" + eventosList.size());
+        this.meusEventos.clear();
         for (int i = 0; i < EventoCases.eventosList.size(); i++){
-            //Log.d("certo",eventosList.get(i).getKeyCriador() + "id: " + usuarioLogado.getId());
             if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
                 meusEventos.add(EventoCases.eventosList.get(i));
-                //Log.d("certo", "Adicionou");
+                Log.d("certo", "" + meusEventos.size());
             }
         }
-        //Log.d("certo", "nao pegou ninguem");
+        Log.d("certo", "" + meusEventos.size());
         return meusEventos;
     }
 

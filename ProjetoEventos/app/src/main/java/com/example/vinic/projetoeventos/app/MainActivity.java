@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(viewPager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
-        EventoCases.pegarEventosNoFirebase();
     }
 
     public void novoEvento(View view) {
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPageAdapter(getSupportFragmentManager());
-        FragmentMeusEventos fragmentMeusEventos = new FragmentMeusEventos();
 
         adapter.addFragment(new FragmentMeusEventos(), "Meus eventos");
         adapter.addFragment(new FragmentEventos(), "Eventos");

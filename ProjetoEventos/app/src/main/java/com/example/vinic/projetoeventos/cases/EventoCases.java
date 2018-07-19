@@ -34,10 +34,10 @@ public class EventoCases {
 
     public static void pegarEventosNoFirebase(){
         eventosList = new ArrayList<>();
-        eventosList.clear();
         databaseReferenceEvento.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventosList.clear();
                 for (DataSnapshot postSnapsshot : dataSnapshot.getChildren()){
                     Evento evento = postSnapsshot.getValue(Evento.class);
                     eventosList.add(evento);
@@ -49,7 +49,6 @@ public class EventoCases {
 
             }
         });
-        Log.d("certo" , ""  + eventosList.size() + "ruim");
     }
 
 }
