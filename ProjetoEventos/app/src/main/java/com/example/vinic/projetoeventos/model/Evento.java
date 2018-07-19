@@ -28,7 +28,7 @@ public class Evento {
     }
 
 
-    public Evento(String id, String nome, String local, String tipoEvento, Date dataInicio, Date dataFinal, int quantPessoas, String keyCriador) {
+    public Evento(String id, String nome, String tipoEvento, String local, Date dataInicio, Date dataFinal, int quantPessoas, String keyCriador) {
 
         this.id = id;
         this.nome = nome;
@@ -144,12 +144,12 @@ public class Evento {
         HashMap<String, Object> result = new HashMap<>();
         result.put("id", id);
         result.put("nome", nome);
-        result.put("dataInicio", dataInicial);
-        result.put("dataTermino", dataFinal);
+        result.put("dataInicial", dataInicial);
+        result.put("dataFinal", dataFinal);
         result.put("quantPessoas", quantPessoas);
-        result.put("status", statusDoEvento);
+        result.put("statusDoEvento", statusDoEvento);
         result.put("local", local);
-        result.put("tipo", tipoEvento);
+        result.put("tipoEvento", tipoEvento);
         result.put("instituicoes", instituicoes);
         result.put("atividades", atividades);
         result.put("tags", tags);
