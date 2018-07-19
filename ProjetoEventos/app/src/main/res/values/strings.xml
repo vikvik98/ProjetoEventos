@@ -17,4 +17,14 @@
     <string name="nome_do_evento">Nome do evento</string>
     <string name="dd_mm_aaaa">DD-MM-AAAA</string>
     <string name="maximo_de_inscritos">Maximo de inscritos</string>
+    <string name="data">Data: </string>
+    <string name="tipo_de_atividade">Tipo de atividade:</string>
+    <string name="palestra">Palestra</string>
+    <string name="minicurso">Minicurso</string>
+    <string name="mesa_redonda">Mesa Redonda</string>
+    <string name="descri_o">Descrição</string>
+    <string name="valor">Valor</string>
+    <string name="adicionar_atividade">Adicionar Atividade</string>
+    <string name="hora_de_inicio">Hora de inicio:</string>
+    <string name="preencher_campos">Preencha todos os campos</string>
 </resources>
