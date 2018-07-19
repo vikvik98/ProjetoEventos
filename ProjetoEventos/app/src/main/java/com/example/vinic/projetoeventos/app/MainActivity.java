@@ -55,5 +55,4 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    //reclamação, se eu conseguir resolver, ai está a oportunidade
 }
