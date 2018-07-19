@@ -1,18 +1,30 @@
 package com.example.vinic.projetoeventos.cases;
 
 
+import android.support.annotation.NonNull;
+
 import com.example.vinic.projetoeventos.app.LoginActivity;
+import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Usuario;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UsuarioCases {
+
+    public static List<Usuario> usuarios;
+    public static DatabaseReference databaseReference = ConfiguracaoFirebase.getDatabaseReference().child("usuarios");
 
 
     public static Boolean cadastrarUsuario(String nome, String senha, String email){
@@ -22,28 +34,39 @@ public class UsuarioCases {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/usuarios/" + keyUser,usuarioValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
-        LoginActivity.usuario = usuario;
+        MainActivity.usuarioLogado = usuario;
         return true;
 
     }
 
     public static Usuario logarUsuario(String email){
-        for (int i = 0; i < LoginActivity.usuarios.size(); i++) {
-            if(LoginActivity.usuarios.get(i).getEmail().equals(email)){
-                return LoginActivity.usuarios.get(i);
+        for (int i = 0; i < usuarios.size(); i++) {
+            if(usuarios.get(i).getEmail().equals(email)){
+                return usuarios.get(i);
             }
         }
         return null;
     }
 
-    public static boolean cadastrarEvento(String nome, String tipo, String local, Date dataInicio, Date dataFinal, int quant, String key){
-        String keyEvent = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
-        Evento evento = new Evento(keyEvent,nome,tipo,local,dataInicio,dataFinal,quant,key);
-        Map<String, Object> usuarioValues = evento.toMap();
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/eventos/" + keyEvent,usuarioValues);
-        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
-        return true;
+
+    public static void pegarUsuariosNoFirebase(){
+        usuarios = new ArrayList<>();
+        usuarios.clear();
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapsshot : dataSnapshot.getChildren()){
+                    Usuario user = postSnapsshot.getValue(Usuario.class);
+                    usuarios.add(user);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
 
 }

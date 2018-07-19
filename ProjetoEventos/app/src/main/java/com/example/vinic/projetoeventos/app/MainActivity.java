@@ -16,10 +16,12 @@ import com.example.vinic.projetoeventos.holder.FragmentEventos;
 import com.example.vinic.projetoeventos.holder.FragmentInscricao;
 import com.example.vinic.projetoeventos.holder.FragmentMeusEventos;
 import com.example.vinic.projetoeventos.holder.ViewPageAdapter;
+import com.example.vinic.projetoeventos.model.Usuario;
 
 public class MainActivity extends AppCompatActivity {
 
     private ViewPageAdapter adapter;
+    public static Usuario usuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
