@@ -15,7 +15,6 @@ public class Usuario {
     private String email;
     private List<Tag> tags;
     private List<Inscricao> inscricoes;
-    private List<Evento> eventos = new ArrayList<>();
 
     public Usuario(){
 
@@ -28,7 +27,6 @@ public class Usuario {
         this.email = email;
         this.tags = new ArrayList<>();
         this.inscricoes = new ArrayList<>();
-        this.eventos = new ArrayList<>();;
     }
 
 
@@ -72,13 +70,6 @@ public class Usuario {
         this.inscricoes = inscricoes;
     }
 
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }
 
     public String getId() {
         return id;
@@ -95,7 +86,8 @@ public class Usuario {
         result.put("nome", nome);
         result.put("senha", senha);
         result.put("email", email);
-        result.put("eventos", eventos);
+        result.put("tags", tags);
+        result.put("inscricoes", inscricoes);
 
         return result;
     }
