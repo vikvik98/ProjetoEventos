@@ -15,8 +15,6 @@ import com.example.vinic.projetoeventos.controller.UsuarioController;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
     private EditText editTextEmail;
     private EditText editTextSenha;
 

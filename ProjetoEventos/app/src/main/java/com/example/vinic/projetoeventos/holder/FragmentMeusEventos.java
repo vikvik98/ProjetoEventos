@@ -25,7 +25,7 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
     private RecyclerView rvEventos;
     private EventosAdapter adapter;
     private static View view;
-    private List<Evento> meusEventos;
+    private List<Evento> meusEventos = new ArrayList<>();;
 
     @Nullable
     @Override
@@ -50,16 +50,14 @@ public class FragmentMeusEventos extends android.support.v4.app.Fragment{
         for (int i = 0; i < EventoCases.eventosList.size(); i++){
             if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
                 meusEventos.add(EventoCases.eventosList.get(i));
-                Log.d("certo", "" + meusEventos.size());
+
             }
         }
-        Log.d("certo", "" + meusEventos.size());
         return meusEventos;
     }
 
     private void setupViews() {
         rvEventos = view.findViewById(R.id.rv_eventos);
-        meusEventos = new ArrayList<>();
     }
 
 }
