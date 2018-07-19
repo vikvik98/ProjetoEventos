@@ -26,4 +26,5 @@
     <string name="valor">Valor</string>
     <string name="adicionar_atividade">Adicionar Atividade</string>
     <string name="hora_de_inicio">Hora de inicio:</string>
+    <string name="preencher_campos">Preencha todos os campos</string>
 </resources>

@@ -47,62 +47,29 @@
                 android:onClick="pegarData"/>
         </LinearLayout>
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/add_hora_inicio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
-            android:orientation="horizontal">
+            android:hint="Hora de inicio"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/hora_de_inicio"
-                android:textSize="18sp"/>
-
-            <TextView
-                android:id="@+id/add_hora_inicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="6"
-                android:textSize="18sp"
-                android:text="00:00"
-                android:onClick="pegarHora"/>
-        </LinearLayout>
-
-
-        <TextView
+        <EditText
+            android:id="@+id/add_hora_final"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@string/tipo_de_atividade"
-            android:textSize="18sp"/>
+            android:background="@drawable/edit_text_mod"
+            android:hint="Hora de Termino"/>
 
-        <RadioGroup
-            android:id="@+id/group_tipo_atividade"
+
+        <EditText
+            android:id="@+id/add_tipo_atividade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@drawable/edit_text_mod"
+            android:hint="Tipo de atividade"/>
 
-            <RadioButton
-                android:id="@+id/rb_palestra_atividade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/palestra"/>
 
-            <RadioButton
-                android:id="@+id/rb_minicurso_atividade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/minicurso"/>
-
-            <RadioButton
-                android:id="@+id/rb_mesa_redonda_atividade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mesa_redonda"/>
-
-        </RadioGroup>
 
         <EditText
             android:id="@+id/descricao_atividade"
@@ -127,6 +94,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_mod"
             android:layout_marginTop="4dp"
+            android:onClick="adicionarEvento"
             android:text="@string/adicionar_atividade"/>
 
     </LinearLayout>

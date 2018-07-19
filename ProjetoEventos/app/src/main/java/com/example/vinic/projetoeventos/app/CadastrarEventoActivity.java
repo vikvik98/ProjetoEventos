@@ -34,13 +34,12 @@ public class CadastrarEventoActivity extends AppCompatActivity {
     }
 
     public void adicionarEvento(View view) {
-        startActivity(new Intent(this, CadastrarAtividadeActivity.class));
-//        if (camposVazios(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas)){
-//            EventoController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
-//            finish();
-//        }else{
-//            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
-//        }
+        if (camposVazios(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas)){
+            EventoController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
+            finish();
+        }else{
+            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean camposVazios(EditText editTextNomeEvento,EditText editTextLocal,

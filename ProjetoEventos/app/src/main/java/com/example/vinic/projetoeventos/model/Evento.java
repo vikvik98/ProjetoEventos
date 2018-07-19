@@ -2,6 +2,7 @@ package com.example.vinic.projetoeventos.model;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +38,8 @@ public class Evento {
         this.statusDoEvento = "Aberto";
         this.quantPessoas = quantPessoas;
         this.keyCriador = keyCriador;
+        this.atividades = new ArrayList<>();
+        this.tags = new ArrayList<>();
     }
 
     public String getKeyCriador() {
