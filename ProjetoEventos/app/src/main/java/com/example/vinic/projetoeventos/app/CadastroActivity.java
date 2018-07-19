@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.controller.UsuarioController;
 
 public class CadastroActivity extends AppCompatActivity {
@@ -31,9 +32,9 @@ public class CadastroActivity extends AppCompatActivity {
         boolean existe = false;
 
         if (verificarCamposVazios()){
-            for (int i = 0; i < LoginActivity.usuarios.size(); i++) {
+            for (int i = 0; i < UsuarioCases.usuarios.size(); i++) {
 
-                if(LoginActivity.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
+                if(UsuarioCases.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
                     Toast.makeText(this, "Este email já está cadastrado", Toast.LENGTH_SHORT).show();
                     existe = true;
                 }
@@ -47,7 +48,7 @@ public class CadastroActivity extends AppCompatActivity {
                 }
             }
 
-            else if (LoginActivity.usuarios.size() == 0){
+            else if (UsuarioCases.usuarios.size() == 0){
                 realizarLogin();
             }
         }
