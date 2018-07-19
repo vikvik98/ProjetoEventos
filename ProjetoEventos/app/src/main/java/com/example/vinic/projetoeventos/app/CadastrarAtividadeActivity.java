@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -14,6 +15,8 @@ import com.example.vinic.projetoeventos.holder.TimePickerFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static android.app.PendingIntent.getActivity;
 
 public class CadastrarAtividadeActivity extends AppCompatActivity {
 
@@ -73,7 +76,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
     }
 
     public void pegarHora(View v) {
-            DialogFragment newFragment = new TimePickerFragment();
-            newFragment.show(getFragmentManager(), "timePicker");
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
 }
