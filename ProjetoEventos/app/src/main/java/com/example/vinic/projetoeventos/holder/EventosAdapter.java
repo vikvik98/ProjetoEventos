@@ -21,14 +21,11 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
 
     private Context context;
     private List<Evento> eventos;
-    //private Box<Capitulos> box;
-    //Dados da firebase
 
     public EventosAdapter(Context context, List<Evento> eventos) {
         this.context = context;
         this.eventos = eventos;
-        //this.box = box;
-        // FIREBASE
+
     }
 
 
@@ -74,10 +71,5 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
 
         }
     }
-
-    public void setCapitulos(List<Evento> capitulos) {
-        this.eventos = capitulos;
-    }
-
 
 }

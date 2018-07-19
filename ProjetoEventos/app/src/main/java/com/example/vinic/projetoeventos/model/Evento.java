@@ -149,6 +149,7 @@ public class Evento {
         result.put("instituicoes", instituicoes);
         result.put("atividades", atividades);
         result.put("tags", tags);
+        result.put("keyCriador", keyCriador);
 
         return result;
     }

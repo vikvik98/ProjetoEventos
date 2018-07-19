@@ -1,5 +1,6 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPageAdapter(getSupportFragmentManager());
+        FragmentMeusEventos fragmentMeusEventos = new FragmentMeusEventos();
+
         adapter.addFragment(new FragmentMeusEventos(), "Meus eventos");
         adapter.addFragment(new FragmentEventos(), "Eventos");
         adapter.addFragment(new FragmentInscricao(), "Inscrições");
