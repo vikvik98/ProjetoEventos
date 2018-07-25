@@ -6,7 +6,9 @@ import android.support.annotation.NonNull;
 import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
+import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Evento;
+import com.example.vinic.projetoeventos.model.Inscricao;
 import com.example.vinic.projetoeventos.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +27,7 @@ public class UsuarioCases {
 
     public static List<Usuario> usuarios;
     public static DatabaseReference databaseReference = ConfiguracaoFirebase.getDatabaseReference().child("usuarios");
+    public static List<Inscricao> inscricoes;
 
 
     public static Boolean cadastrarUsuario(String nome, String senha, String email){
@@ -68,6 +71,48 @@ public class UsuarioCases {
 
             }
         });
+    }
+
+    public static void pegarInscricoesNoFirebase(){
+        inscricoes = new ArrayList<>();
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                inscricoes.clear();
+                for (DataSnapshot postSnapsshot : dataSnapshot.getChildren()){
+                    Inscricao inscricao = postSnapsshot.getValue(Inscricao.class);
+                    inscricoes.add(inscricao);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public static boolean inserirAtividadeNaInscricoes(String keyUsuario,String keyEvento,Atividade atividade){
+        for (int i = 0; i < inscricoes.size(); i++) {
+            if(inscricoes.get(i).getKeyEvento().equals(keyEvento)){
+                String keyInscricao = inscricoes.get(i).getId();
+                inscricoes.get(i).getAtividades().add(atividade);
+                Map<String, Object> inscricaoValues = inscricoes.get(i).toMap();
+                Map<String, Object> childUpdates = new HashMap<>();
+                childUpdates.put("/inscricoes/" + keyInscricao,inscricaoValues);
+                ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+                return true;
+            }
+        }
+        String keyInscricao = ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").push().getKey();
+        Inscricao inscricao = new Inscricao(keyEvento,keyUsuario,keyEvento);
+        inscricao.getAtividades().add(atividade);
+        Map<String, Object> inscricaoValues = inscricao.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/inscricoes/" + keyInscricao,inscricaoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+        return true;
     }
 
 
