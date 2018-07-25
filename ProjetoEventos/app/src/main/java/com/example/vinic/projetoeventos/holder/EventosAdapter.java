@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.CadastrarAtividadeActivity;
 import com.example.vinic.projetoeventos.app.CadastrarEventoActivity;
+import com.example.vinic.projetoeventos.app.ListaAtividades;
 import com.example.vinic.projetoeventos.model.Evento;
 
 import org.w3c.dom.Text;
@@ -52,7 +53,7 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, CadastrarAtividadeActivity.class).putExtra("id", evento.getId()));
+                        context.startActivity(new Intent(context, ListaAtividades.class).putExtra("id", evento.getId()));
                     }
                 }
         );
