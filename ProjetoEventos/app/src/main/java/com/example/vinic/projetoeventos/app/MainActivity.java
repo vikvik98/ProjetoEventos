@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
@@ -33,18 +32,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_drawer);
+        setContentView(R.layout.activity_drawer);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupDrawer(toolbar);
 
         rvEventos = findViewById(R.id.rv_eventos);
+        reloadData(pegarEventos(MainActivity.usuarioLogado));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        reloadData();
+
     }
 
     private void setupDrawer(Toolbar toolbar) {
@@ -58,9 +58,9 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    private void reloadData() {
+    private void reloadData(List<Evento> eventoList) {
 
-        adapter = new EventosAdapter(this, pegarEventos(MainActivity.usuarioLogado));
+        adapter = new EventosAdapter(this, eventoList);
         rvEventos.setAdapter(adapter);
         rvEventos.setLayoutManager(new LinearLayoutManager(this));
         rvEventos.setHasFixedSize(true);
@@ -116,17 +116,37 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_meus_eventos) {
-            // Handle the camera action
+        if (id == R.id.nav_eventos){
+            this.meusEventos.clear();
+            for (int i = 0; i < EventoCases.eventosList.size(); i++) {
+                if (!EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())) {
+                    meusEventos.add(EventoCases.eventosList.get(i));
+                }
+            }
+            reloadData(meusEventos);
+
+        } else if (id == R.id.nav_meus_eventos) {
+            this.meusEventos.clear();
+            for (int i = 0; i < EventoCases.eventosList.size(); i++) {
+                if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())) {
+                    meusEventos.add(EventoCases.eventosList.get(i));
+                }
+            }
+            reloadData(meusEventos);
+
+            //TODO: Fazer que fab seja mostrado em meus eventos activytty
+
         } else if (id == R.id.nav_eventos_inscritos) {
+            //robherty
 
         } else if (id == R.id.nav_editar_conta) {
+            //robherty
 
         } else if (id == R.id.nav_sair) {
-
+            //robherty
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
