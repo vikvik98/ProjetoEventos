@@ -17,9 +17,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".app.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity
             android:name=".app.CadastroActivity"
             android:parentActivityName=".app.LoginActivity" />
         <activity android:name=".app.InscricaoActivity" />
@@ -29,8 +26,13 @@
         <activity
             android:name=".app.CadastrarAtividadeActivity"
             android:parentActivityName=".app.CadastrarEventoActivity" />
-        <activity android:name=".app.ListaAtividades"
-            android:parentActivityName=".app.CadastrarEventoActivity" ></activity>
+        <activity
+            android:name=".app.ListaAtividades"
+            android:parentActivityName=".app.CadastrarEventoActivity" />
+        <activity
+            android:name=".app.MainActivity"
+            android:label="@string/title_activity_test_drawer"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

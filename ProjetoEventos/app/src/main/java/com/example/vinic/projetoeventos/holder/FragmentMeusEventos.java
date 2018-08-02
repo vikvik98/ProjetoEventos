@@ -4,16 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Usuario;
 

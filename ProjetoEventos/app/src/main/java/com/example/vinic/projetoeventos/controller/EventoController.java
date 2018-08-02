@@ -3,10 +3,8 @@ package com.example.vinic.projetoeventos.controller;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.ParseException;

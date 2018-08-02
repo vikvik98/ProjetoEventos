@@ -3,11 +3,9 @@ package com.example.vinic.projetoeventos.cases;
 
 import android.support.annotation.NonNull;
 
-import com.example.vinic.projetoeventos.app.LoginActivity;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Atividade;
-import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Inscricao;
 import com.example.vinic.projetoeventos.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -15,10 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
