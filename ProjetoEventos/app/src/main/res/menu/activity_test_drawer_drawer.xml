@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_eventos"
+            android:icon="@drawable/ic_eventos"
+            android:title="Eventos"/>
+        <item
+            android:id="@+id/nav_meus_eventos"
+            android:icon="@drawable/ic_meus_eventos"
+            android:title="Meus Eventos" />
+        <item
+            android:id="@+id/nav_eventos_inscritos"
+            android:icon="@drawable/ic_inscrito"
+            android:title="Eventos Inscrito" />
+        <item
+            android:id="@+id/nav_editar_conta"
+            android:icon="@drawable/ic_editar_conta"
+            android:title="Editar Perfil" />
+        <item
+            android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_logout"
+            android:title="Sair" />
+    </group>
+
+</menu>
