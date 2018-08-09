@@ -1,17 +1,21 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
@@ -27,19 +31,29 @@ public class MainActivity extends AppCompatActivity
 
     private RecyclerView rvEventos;
     private EventosAdapter adapter;
-    private List<Evento> meusEventos = new ArrayList<>();
+    private List<Evento> eventos = new ArrayList<>();
+    private FloatingActionButton addEvento;
+    private TextView nome;
+    private TextView email;
     public static Usuario usuarioLogado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
+        addEvento = findViewById(R.id.add_evento_fab);
+        rvEventos = findViewById(R.id.rv_eventos);
+        nome = findViewById(R.id.nome_usuario);
+        email = findViewById(R.id.email_usuario);
         setSupportActionBar(toolbar);
         setupDrawer(toolbar);
 
-        rvEventos = findViewById(R.id.rv_eventos);
+        addEvento.setVisibility(View.INVISIBLE);
         reloadData(pegarEventos(MainActivity.usuarioLogado));
+//        nome.setText(usuarioLogado.getNome());
+//        email.setText(usuarioLogado.getEmail());
     }
 
     @Override
@@ -69,14 +83,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private List<Evento> pegarEventos(Usuario usuarioLogado){
-        this.meusEventos.clear();
+        this.eventos.clear();
         for (int i = 0; i < EventoCases.eventosList.size(); i++){
             if (!EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                meusEventos.add(EventoCases.eventosList.get(i));
+                eventos.add(EventoCases.eventosList.get(i));
 
             }
         }
-        return meusEventos;
+        return eventos;
     }
 
     @Override
@@ -89,27 +103,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.test_drawer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -118,22 +111,24 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_eventos){
-            this.meusEventos.clear();
+            this.eventos.clear();
             for (int i = 0; i < EventoCases.eventosList.size(); i++) {
                 if (!EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())) {
-                    meusEventos.add(EventoCases.eventosList.get(i));
+                    eventos.add(EventoCases.eventosList.get(i));
                 }
             }
-            reloadData(meusEventos);
+            addEvento.setVisibility(View.INVISIBLE);
+            reloadData(eventos);
 
         } else if (id == R.id.nav_meus_eventos) {
-            this.meusEventos.clear();
+            this.eventos.clear();
             for (int i = 0; i < EventoCases.eventosList.size(); i++) {
                 if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())) {
-                    meusEventos.add(EventoCases.eventosList.get(i));
+                    eventos.add(EventoCases.eventosList.get(i));
                 }
             }
-            reloadData(meusEventos);
+            addEvento.setVisibility(View.VISIBLE);
+            reloadData(eventos);
 
             //TODO: Fazer que fab seja mostrado em meus eventos activytty
 
@@ -152,5 +147,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void adicionandoEvento(View view) {
+        startActivity(new Intent(this, CadastrarEventoActivity.class));
     }
 }

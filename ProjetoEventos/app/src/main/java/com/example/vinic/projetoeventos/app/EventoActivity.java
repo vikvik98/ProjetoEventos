@@ -5,23 +5,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.cases.UsuarioCases;
-import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Evento;
-import com.example.vinic.projetoeventos.model.Usuario;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ListaAtividades extends AppCompatActivity {
+public class EventoActivity extends AppCompatActivity {
 
     RecyclerView rvAtividades;
     TextView tvEventoNome;
@@ -35,13 +32,12 @@ public class ListaAtividades extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_atividades);
+        setContentView(R.layout.activity_evento);
 
         rvAtividades = (RecyclerView) findViewById(R.id.rv_atividades);
         tvEventoNome = (TextView) findViewById((R.id.lista_atividade_titulo));
         tvEventoData = (TextView) findViewById(R.id.lista_atividade_data);
         tvEventoLocal = (TextView) findViewById(R.id.lista_atividade_local);
-
 
         Intent intent = getIntent();
 
@@ -56,7 +52,11 @@ public class ListaAtividades extends AppCompatActivity {
 
         tvEventoNome.setText(evento.getNome());
         tvEventoLocal.setText(evento.getLocal());
-        //tvEventoData.setText(evento.getDataInicial().toString());
+        try {
+            tvEventoData.setText(new SimpleDateFormat("dd/MM/yy").parse(evento.getDataInicial().toString()).toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         atividades = evento.getAtividades();
 
     }
@@ -71,7 +71,7 @@ public class ListaAtividades extends AppCompatActivity {
 
         adapter = new ListaAtividadesRVAdapter(this,atividades);
         rvAtividades.setAdapter(adapter);
-        rvAtividades.setLayoutManager(new LinearLayoutManager(ListaAtividades.this));
+        rvAtividades.setLayoutManager(new LinearLayoutManager(EventoActivity.this));
 
     }
 
