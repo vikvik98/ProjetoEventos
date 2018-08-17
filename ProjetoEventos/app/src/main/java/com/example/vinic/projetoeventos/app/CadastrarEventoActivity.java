@@ -1,7 +1,6 @@
 package com.example.vinic.projetoeventos.app;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +9,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.controller.EventoController;
-import com.example.vinic.projetoeventos.controller.UsuarioController;
+import com.example.vinic.projetoeventos.cases.EventoCases;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CadastrarEventoActivity extends AppCompatActivity {
 
@@ -35,8 +35,22 @@ public class CadastrarEventoActivity extends AppCompatActivity {
 
     public void adicionarEvento(View view) {
         if (camposVazios(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas)){
-            EventoController.cadastrarEvento(editTextNomeEvento,editTextTipoEvento,editTextLocal,textViewDataInicio,textViewDataFinal,editTextQuantPessoas);
-            finish();
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+
+            String nomeEvento = editTextNomeEvento.getText().toString();
+            String tipoEvento = editTextTipoEvento.getText().toString();
+            String localEvento = editTextLocal.getText().toString();
+            int quantPessoas = Integer.parseInt(editTextQuantPessoas.getText().toString());
+
+            try {
+                Date dataEventoInicio = format.parse(textViewDataInicio.getText().toString());
+                Date dataEventoFinal = format.parse(textViewDataFinal.getText().toString());
+                EventoCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, MainActivity.usuarioLogado.getId());
+                finish();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
         }else{
             Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
         }

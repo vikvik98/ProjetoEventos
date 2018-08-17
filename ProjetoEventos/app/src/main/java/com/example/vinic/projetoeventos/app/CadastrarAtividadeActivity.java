@@ -3,7 +3,6 @@ package com.example.vinic.projetoeventos.app;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,7 +10,6 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.controller.EventoController;
 import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.SimpleDateFormat;
@@ -91,7 +89,12 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.preencher_campos, Toast.LENGTH_SHORT).show();
         }else{
 
-            EventoController.cadastrarAtividade(evento, nome, tipo, horaInicio, horaFinal, valor);
+            String nomeAtividade = nome.getText().toString();
+            String tipoAtividade = tipo.getText().toString();
+            String horaInicioAtividade = horaInicio.getText().toString();
+            String horaTerminoAtivade = horaFinal.getText().toString();
+            double valorAtividade = Double.parseDouble(valor.getText().toString());
+            EventoCases.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
             Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
             finish();
 

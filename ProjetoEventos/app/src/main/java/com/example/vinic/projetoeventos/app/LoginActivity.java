@@ -9,8 +9,6 @@ import android.widget.Toast;
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
-import com.example.vinic.projetoeventos.controller.UsuarioController;
-
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,7 +43,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void realizarLogin() {
-        MainActivity.usuarioLogado = UsuarioController.logarUsuario(editTextEmail);
+        String emailUsuario = editTextEmail.getText().toString();
+        MainActivity.usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
         Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         finish();
