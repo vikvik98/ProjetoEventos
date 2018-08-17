@@ -91,7 +91,12 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.preencher_campos, Toast.LENGTH_SHORT).show();
         }else{
 
-            EventoController.cadastrarAtividade(evento, nome, tipo, horaInicio, horaFinal, valor);
+            String nomeAtividade = nome.getText().toString();
+            String tipoAtividade = tipo.getText().toString();
+            String horaInicioAtividade = horaInicio.getText().toString();
+            String horaTerminoAtivade = horaFinal.getText().toString();
+            double valorAtividade = Double.parseDouble(valor.getText().toString());
+            EventoCases.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
             Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
             finish();
 

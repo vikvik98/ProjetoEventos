@@ -63,7 +63,12 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     }
 
     private void realizarLogin() {
-        UsuarioController.cadastrarUsuario(editTextNome,editTextSenha,editTextEmail);
+        String nomeUsuario = editTextNome.getText().toString();
+        String senhaUsuario = editTextSenha.getText().toString();
+        String emailUsuario = editTextEmail.getText().toString();
+
+        UsuarioCases.cadastrarUsuario(nomeUsuario,senhaUsuario,emailUsuario);
+
         Toast.makeText(this, "Usuario cadastrado!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         finish();
