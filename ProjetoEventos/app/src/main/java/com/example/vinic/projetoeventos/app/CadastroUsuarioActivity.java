@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.UsuarioCases;
-import com.example.vinic.projetoeventos.controller.UsuarioController;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 

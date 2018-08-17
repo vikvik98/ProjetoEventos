@@ -1,7 +1,6 @@
 package com.example.vinic.projetoeventos.app;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,8 +10,6 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.controller.EventoController;
-import com.example.vinic.projetoeventos.controller.UsuarioController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
