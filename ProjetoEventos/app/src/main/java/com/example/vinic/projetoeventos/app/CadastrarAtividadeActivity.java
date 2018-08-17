@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.controller.EventoController;
+import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -27,6 +28,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
     private Calendar dataAtividade;
     private EditText horaInicio;
     private EditText horaFinal;
+    private Evento evento;
     private String idEvento;
 
 
@@ -36,6 +38,12 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar_atividade);
 
         idEvento = getIntent().getStringExtra("id");
+
+        for(int i = 0; i < EventoCases.eventosList.size(); i++) {
+            if (EventoCases.eventosList.get(i).getId().equals(idEvento)) {
+                evento = EventoCases.eventosList.get(i);
+            }
+        }
 
         setupViews();
     }
@@ -61,7 +69,8 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
                 }, ano, mes, dia);
 
         /** Definir data mínima a ser escolhida sendo a data atual */
-        datePickerDialog.getDatePicker().setMinDate(dataAtividade.getTimeInMillis());
+        datePickerDialog.getDatePicker().setMinDate(evento.getDataInicial().getTime());
+        datePickerDialog.getDatePicker().setMaxDate(evento.getDataFinal().getTime());
         datePickerDialog.show();
 
     }
@@ -81,15 +90,11 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
         if(camposVazios(nome, txtDataAtividade, valor, horaInicio, horaFinal)){
             Toast.makeText(this, R.string.preencher_campos, Toast.LENGTH_SHORT).show();
         }else{
-            Log.d("msg", idEvento);
-            for(int i = 0; i < EventoCases.eventosList.size(); i++){
-                Log.d("msg", "" + EventoCases.eventosList.get(i));
-                if(EventoCases.eventosList.get(i).getId().equals(idEvento)){
-                    EventoController.cadastrarAtividade(EventoCases.eventosList.get(i), nome, tipo, horaInicio, horaFinal, valor);
-                    Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            }
+
+            EventoController.cadastrarAtividade(evento, nome, tipo, horaInicio, horaFinal, valor);
+            Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
+            finish();
+
         }
     }
 

@@ -10,16 +10,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.app.CadastrarAtividadeActivity;
-import com.example.vinic.projetoeventos.app.CadastrarEventoActivity;
-import com.example.vinic.projetoeventos.app.ListaAtividades;
+import com.example.vinic.projetoeventos.app.EventoActivity;
+import com.example.vinic.projetoeventos.app.InscricaoActivity;
+import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.model.Evento;
-
-import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHolder> {
 
@@ -53,7 +50,11 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        context.startActivity(new Intent(context, ListaAtividades.class).putExtra("id", evento.getId()));
+                        if(evento.getKeyCriador().equals(MainActivity.usuarioLogado.getId()))
+                            context.startActivity(new Intent(context, EventoActivity.class).putExtra("id", evento.getId()));
+                        else{
+                            context.startActivity(new Intent(context, InscricaoActivity.class).putExtra("id", evento.getId()));
+                        }
                     }
                 }
         );
