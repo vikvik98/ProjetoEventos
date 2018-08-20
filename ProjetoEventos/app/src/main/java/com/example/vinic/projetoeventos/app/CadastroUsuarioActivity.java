@@ -1,6 +1,7 @@
 package com.example.vinic.projetoeventos.app;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
     private EditText editTextEmail;
     private EditText editTextSenha;
     private EditText editTextCoSenha;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Usuario cadastrado!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
+        first();
         finish();
     }
 
@@ -78,5 +81,11 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         editTextEmail = findViewById(R.id.email_cadastro);
         editTextSenha = findViewById(R.id.senha_cadastro);
         editTextCoSenha = findViewById(R.id.confirmar_senha_cadastro);
+    }
+
+    private void first(){
+        mPreferences = getSharedPreferences("event's", MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean("first", true);
     }
 }

@@ -2,9 +2,11 @@ package com.example.vinic.projetoeventos.app;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -55,6 +57,19 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+
+        SharedPreferences shared = getSharedPreferences("event",MODE_PRIVATE);
+        boolean first = shared.getBoolean("first", false);
+
+        if (first){
+
+            reloadData(pegarEventos(usuarioLogado));
+            addEvento.setVisibility(View.GONE);
+            SharedPreferences.Editor editor = shared.edit();
+            editor.putBoolean("first", false);
+            editor.commit();
+            editor.apply();
+        }
 
     }
 
@@ -154,7 +169,6 @@ public class MainActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1){
             if (resultCode == RESULT_OK){
-                Toast.makeText(this, "deu bom", Toast.LENGTH_SHORT).show();
                 addEvento.setVisibility(View.VISIBLE);
                 reloadData(pegarMeusEventos(usuarioLogado));
             }
