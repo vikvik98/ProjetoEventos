@@ -60,7 +60,11 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
+        relerEventos();
+
+
     }
+
 
     private void setupDrawer(Toolbar toolbar) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -121,14 +125,7 @@ public class MainActivity extends AppCompatActivity
             reloadData(eventos);
 
         } else if (id == R.id.nav_meus_eventos) {
-            this.eventos.clear();
-            for (int i = 0; i < EventoCases.eventosList.size(); i++) {
-                if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())) {
-                    eventos.add(EventoCases.eventosList.get(i));
-                }
-            }
-            addEvento.setVisibility(View.VISIBLE);
-            reloadData(eventos);
+            relerEventos();
 
             //TODO: Fazer que fab seja mostrado em meus eventos activytty
 
@@ -151,5 +148,16 @@ public class MainActivity extends AppCompatActivity
 
     public void adicionandoEvento(View view) {
         startActivity(new Intent(this, CadastrarEventoActivity.class));
+    }
+
+    private void relerEventos() {
+        this.eventos.clear();
+        for (int i = 0; i < EventoCases.eventosList.size(); i++) {
+            if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())) {
+                eventos.add(EventoCases.eventosList.get(i));
+            }
+        }
+        addEvento.setVisibility(View.VISIBLE);
+        reloadData(eventos);
     }
 }
