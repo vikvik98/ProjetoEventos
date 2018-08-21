@@ -16,7 +16,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextEmail;
     private EditText editTextSenha;
-    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +36,20 @@ public class LoginActivity extends AppCompatActivity {
 
             if (existe){
                 realizarLogin();
-            }else{
-                //Toast.makeText(this, "Usuario não encontrado!", Toast.LENGTH_SHORT).show();
             }
         }
+
+        if (!existe){
+            Toast.makeText(this, "Usuario não encontrado!", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
     private void realizarLogin() {
         String emailUsuario = editTextEmail.getText().toString();
         MainActivity.usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
-        //Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         first();
         finish();
@@ -68,13 +70,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void setupViews() {
-        editTextEmail = findViewById(R.id.id_email);
-        editTextSenha = findViewById(R.id.id_senha);
+        editTextEmail = findViewById(R.id.editTextEmail);
+        editTextSenha = findViewById(R.id.editTextPassword);
 
     }
 
     private void first(){
-        mPreferences = getSharedPreferences("event", MODE_PRIVATE);
+        SharedPreferences mPreferences = getSharedPreferences("event", MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean("first", true);
         editor.commit();

@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Atividade;
+import com.example.vinic.projetoeventos.model.Cupom;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,6 +62,19 @@ public class EventoCases {
 
             }
         });
+    }
+
+    public void addCupom(float porcentagem, int quantidade){
+
+    }
+
+    public static Evento pegarEvento(String id){
+        for (int i = 0; i <= EventoCases.eventosList.size()-1; i++) {
+            if (EventoCases.eventosList.get(i).getId().equals(id)) {
+                return eventosList.get(i);
+            }
+        }
+        return null;
     }
 
 }

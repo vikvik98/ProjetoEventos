@@ -19,14 +19,14 @@ public class Evento {
     private String local;
     private String tipoEvento;
     private List<String> instituicoes;
-    private List<Atividade> atividades = new ArrayList<>();
+    private List<Atividade> atividades;
+    private List<Cupom> cupons;
     private List<Tag> tags;
     private String keyCriador;
 
     public Evento() {
 
     }
-
 
     public Evento(String id, String nome, String tipoEvento, String local, Date dataInicio, Date dataFinal, int quantPessoas, String keyCriador) {
 
@@ -39,24 +39,13 @@ public class Evento {
         this.statusDoEvento = "Aberto";
         this.quantPessoas = quantPessoas;
         this.keyCriador = keyCriador;
-        //this.atividades = new ArrayList<>();
         this.tags = new ArrayList<>();
+        this.atividades = new ArrayList<>();
+        this.cupons = new ArrayList<>();
     }
 
     public String getKeyCriador() {
         return keyCriador;
-    }
-
-    public void setKeyCriador(String keyCriador) {
-        this.keyCriador = keyCriador;
-    }
-
-    public List<String> getInstituicoes() {
-        return instituicoes;
-    }
-
-    public void setInstituicoes(List<String> instituicoes) {
-        this.instituicoes = instituicoes;
     }
 
     public String getId() {
@@ -67,20 +56,8 @@ public class Evento {
         this.id = id;
     }
 
-    public int getQuantPessoas() {
-        return quantPessoas;
-    }
-
-    public void setQuantPessoas(int quantPessoas) {
-        this.quantPessoas = quantPessoas;
-    }
-
     public String getLocal() {
         return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
     }
 
     public String getNome() {
@@ -95,48 +72,24 @@ public class Evento {
         return dataInicial;
     }
 
-    public void setDataInicial(Date dataInicial) {
-        this.dataInicial = dataInicial;
-    }
-
     public Date getDataFinal() {
         return dataFinal;
-    }
-
-    public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
     }
 
     public String getStatusDoEvento() {
         return statusDoEvento;
     }
 
-    public void setStatusDoEvento(String statusDoEvento) {
-        this.statusDoEvento = statusDoEvento;
-    }
-
-    public String getTipoEvento() {
-        return tipoEvento;
-    }
-
-    public void setTipoEvento(String tipoEvento) {
-        this.tipoEvento = tipoEvento;
-    }
-
     public List<Atividade> getAtividades() {
         return atividades;
     }
 
-    public void setAtividades(List<Atividade> atividades) {
-        this.atividades = atividades;
+    public List<Cupom> getCupons() {
+        return cupons;
     }
 
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setCupons(List<Cupom> cupons) {
+        this.cupons = cupons;
     }
 
     @Exclude

@@ -1,14 +1,18 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.CupomCases;
 import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
@@ -20,13 +24,13 @@ import java.util.List;
 
 public class EventoActivity extends AppCompatActivity {
 
-    RecyclerView rvAtividades;
-    TextView tvEventoNome;
-    TextView tvEventoData;
-    TextView tvEventoLocal;
-    Evento evento;
-    List<Atividade> atividades;
-    ListaAtividadesRVAdapter adapter;
+    private RecyclerView rvAtividades;
+    private TextView tvEventoNome;
+    private TextView tvEventoData;
+    private TextView tvEventoLocal;
+    private Evento evento;
+    private List<Atividade> atividades;
+    private ListaAtividadesRVAdapter adapter;
 
 
     @Override
@@ -34,21 +38,26 @@ public class EventoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evento);
 
-        rvAtividades = (RecyclerView) findViewById(R.id.rv_atividades);
-        tvEventoNome = (TextView) findViewById((R.id.lista_atividade_titulo));
-        tvEventoData = (TextView) findViewById(R.id.lista_atividade_data);
-        tvEventoLocal = (TextView) findViewById(R.id.lista_atividade_local);
-
         Intent intent = getIntent();
-
         String id = intent.getStringExtra("id");
-
 
         for (int i = 0; i <= EventoCases.eventosList.size()-1; i++) {
             if (EventoCases.eventosList.get(i).getId().equals(id)) {
                 evento = EventoCases.eventosList.get(i);
             }
         }
+
+        setupViews();
+
+        atividades = evento.getAtividades();
+
+    }
+
+    private void setupViews() {
+        rvAtividades = findViewById(R.id.rv_atividades);
+        tvEventoNome = findViewById((R.id.lista_atividade_titulo));
+        tvEventoData = findViewById(R.id.lista_atividade_data);
+        tvEventoLocal = findViewById(R.id.lista_atividade_local);
 
         tvEventoNome.setText(evento.getNome());
         tvEventoLocal.setText(evento.getLocal());
@@ -57,8 +66,6 @@ public class EventoActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        atividades = evento.getAtividades();
-
     }
 
     @Override
@@ -78,5 +85,25 @@ public class EventoActivity extends AppCompatActivity {
     public void adicionarAtividade(View view) {
         Intent intent = new Intent(this, CadastrarAtividadeActivity.class).putExtra("id",evento.getId());
         startActivity(intent);
+    }
+
+    public void gerarCupom(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
+
+        builder.setTitle("Gerar cumpons: ");
+        builder.setView(inflate)
+
+                .setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
+
+                    @Override
+
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        Toast.makeText(EventoActivity.this, "Deu bom", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 }
