@@ -12,8 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.cases.CupomCases;
-import com.example.vinic.projetoeventos.cases.EventoCases;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Evento;
@@ -44,9 +43,9 @@ public class EventoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
 
-        for (int i = 0; i < EventoCases.eventosList.size(); i++) {
-            if (EventoCases.eventosList.get(i).getId().equals(id)) {
-                evento = EventoCases.eventosList.get(i);
+        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++) {
+            if (ConfiguracaoFirebase.eventosList.get(i).getId().equals(id)) {
+                evento = ConfiguracaoFirebase.eventosList.get(i);
                 break;
             }
         }

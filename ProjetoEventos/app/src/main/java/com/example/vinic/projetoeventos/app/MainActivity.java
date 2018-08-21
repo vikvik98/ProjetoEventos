@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Usuario;
@@ -75,9 +76,9 @@ public class MainActivity extends AppCompatActivity
 
     private List<Evento> pegarEventos(Usuario usuarioLogado){
         this.eventos.clear();
-        for (int i = 0; i < EventoCases.eventosList.size(); i++){
-            if (!EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                eventos.add(EventoCases.eventosList.get(i));
+        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++){
+            if (!ConfiguracaoFirebase.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
+                eventos.add(ConfiguracaoFirebase.eventosList.get(i));
 
             }
         }
@@ -87,9 +88,9 @@ public class MainActivity extends AppCompatActivity
 
     private List<Evento> pegarMeusEventos(Usuario usuarioLogado) {
         this.eventos.clear();
-        for (int i = 0; i < EventoCases.eventosList.size(); i++){
-            if (EventoCases.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                eventos.add(EventoCases.eventosList.get(i));
+        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++){
+            if (ConfiguracaoFirebase.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
+                eventos.add(ConfiguracaoFirebase.eventosList.get(i));
 
             }
         }

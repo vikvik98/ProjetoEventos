@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.SimpleDateFormat;
@@ -37,9 +38,9 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
 
         idEvento = getIntent().getStringExtra("id");
 
-        for(int i = 0; i < EventoCases.eventosList.size(); i++) {
-            if (EventoCases.eventosList.get(i).getId().equals(idEvento)) {
-                evento = EventoCases.eventosList.get(i);
+        for(int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++) {
+            if (ConfiguracaoFirebase.eventosList.get(i).getId().equals(idEvento)) {
+                evento = ConfiguracaoFirebase.eventosList.get(i);
             }
         }
 
@@ -94,7 +95,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
             String horaInicioAtividade = horaInicio.getText().toString();
             String horaTerminoAtivade = horaFinal.getText().toString();
             double valorAtividade = Double.parseDouble(valor.getText().toString());
-            EventoCases.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
+            ConfiguracaoFirebase.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
             Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
             finish();
 
