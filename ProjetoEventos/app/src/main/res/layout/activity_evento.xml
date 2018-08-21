@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context=".app.EventoActivity">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -19,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,6 +50,14 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <Button
+            android:text="Gerar cupom"
+            android:onClick="gerarCupom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -68,7 +78,6 @@
             app:layout_anchorGravity="bottom|right|end"
             android:onClick="adicionarAtividade" />
     </android.support.design.widget.CoordinatorLayout>
-
 
 
 

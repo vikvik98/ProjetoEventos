@@ -33,4 +33,13 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="desconto">Porcentagem de desconto</string>
+
+
+    <string-array name="porcentagens">
+        <item>5%</item>
+        <item>25%</item>
+        <item>50%</item>
+    </string-array>
+
 </resources>
