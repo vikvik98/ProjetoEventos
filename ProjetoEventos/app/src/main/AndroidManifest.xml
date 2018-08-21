@@ -21,13 +21,13 @@
             android:parentActivityName=".app.LoginActivity" />
         <activity
             android:name=".app.CadastrarEventoActivity"
-            android:parentActivityName=".app.CadastrarAtividadeActivity" />
+            android:parentActivityName=".app.MainActivity" />
         <activity
             android:name=".app.CadastrarAtividadeActivity"
             android:parentActivityName=".app.CadastrarEventoActivity" />
         <activity
             android:name=".app.EventoActivity"
-            android:parentActivityName=".app.CadastrarEventoActivity" />
+            android:parentActivityName=".app.MainActivity" />
         <activity
             android:name=".app.MainActivity"
             android:label="@string/app_name"

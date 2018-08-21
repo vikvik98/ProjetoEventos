@@ -17,6 +17,13 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
 
     private final Context context;
     private final List<Atividade> atividades;
+
+    public ListaAtividadesRVAdapter(Context context, List<Atividade> atividades){
+
+        this.context = context;
+        this.atividades = atividades;
+    }
+
     @NonNull
     @Override
     public ListaAtividadesRVAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -46,6 +53,7 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
     @Override
     public int getItemCount() {
         return atividades.size();
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -61,10 +69,6 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
 
     }
 
-    public ListaAtividadesRVAdapter(Context context, List<Atividade> atividades){
 
-        this.context = context;
-        this.atividades = atividades;
-    }
 
 }
