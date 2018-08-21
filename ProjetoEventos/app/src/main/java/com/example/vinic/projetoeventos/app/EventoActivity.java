@@ -20,6 +20,7 @@ import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventoActivity extends AppCompatActivity {
@@ -38,18 +39,29 @@ public class EventoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_evento);
 
+        setupViews();
+
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
 
-        for (int i = 0; i <= EventoCases.eventosList.size()-1; i++) {
+        for (int i = 0; i < EventoCases.eventosList.size(); i++) {
             if (EventoCases.eventosList.get(i).getId().equals(id)) {
                 evento = EventoCases.eventosList.get(i);
+                break;
             }
         }
 
-        setupViews();
+        tvEventoNome.setText(evento.getNome());
+        tvEventoLocal.setText(evento.getLocal());
+
+        try {
+            tvEventoData.setText(new SimpleDateFormat("dd/MM/yy").parse(evento.getDataInicial().toString()).toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         atividades = evento.getAtividades();
+
 
     }
 
@@ -58,20 +70,16 @@ public class EventoActivity extends AppCompatActivity {
         tvEventoNome = findViewById((R.id.lista_atividade_titulo));
         tvEventoData = findViewById(R.id.lista_atividade_data);
         tvEventoLocal = findViewById(R.id.lista_atividade_local);
-
-        tvEventoNome.setText(evento.getNome());
-        tvEventoLocal.setText(evento.getLocal());
-        try {
-            tvEventoData.setText(new SimpleDateFormat("dd/MM/yy").parse(evento.getDataInicial().toString()).toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        atividades = new ArrayList<>();
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
         reloadData();
+
     }
 
     private void reloadData() {

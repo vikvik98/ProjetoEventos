@@ -13,8 +13,8 @@ public class Usuario {
     private String nome;
     private String senha;
     private String email;
-    private List<Tag> tags;
-    private List<Inscricao> inscricoes;
+    private List<Tag> tags = new ArrayList<>();
+    private List<Inscricao> inscricoes = new ArrayList<>();
 
     public Usuario(){
 
@@ -25,8 +25,6 @@ public class Usuario {
         this.nome = nome;
         this.senha = senha;
         this.email = email;
-        this.tags = new ArrayList<>();
-        this.inscricoes = new ArrayList<>();
     }
 
 

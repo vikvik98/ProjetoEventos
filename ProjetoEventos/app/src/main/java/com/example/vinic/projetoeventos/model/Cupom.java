@@ -7,9 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cupom {
-    private String codigo = "AAA";
-    private int numero = 001;
-    private final String codigoFinal = this.codigo;
+
+    private static int numero = 1;
     private final int numeroFinal = this.numero;
     private Date inicio;
     private Date termino;
@@ -27,17 +26,12 @@ public class Cupom {
     }
 
     private void mudarCodigo(){
-        if (this.numero < 999){
-            this.codigo = "BBB";
-        }else{
-            this.numero++;
-        }
+        this.numero++;
     }
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("codigoFinal", codigoFinal);
         result.put("numeroFinal", numeroFinal);
         result.put("inicio", inicio);
         result.put("termino", termino);

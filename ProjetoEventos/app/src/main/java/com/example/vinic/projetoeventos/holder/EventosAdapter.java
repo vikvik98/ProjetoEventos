@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.EventoActivity;
@@ -50,9 +51,9 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(evento.getKeyCriador().equals(MainActivity.usuarioLogado.getId()))
+                        if(evento.getKeyCriador().equals(MainActivity.usuarioLogado.getId())){
                             context.startActivity(new Intent(context, EventoActivity.class).putExtra("id", evento.getId()));
-                        else{
+                        }else{
                             context.startActivity(new Intent(context, InscricaoActivity.class).putExtra("id", evento.getId()));
                         }
                     }

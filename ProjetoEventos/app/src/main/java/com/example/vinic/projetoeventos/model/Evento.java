@@ -19,9 +19,9 @@ public class Evento {
     private String local;
     private String tipoEvento;
     private List<String> instituicoes;
-    private List<Atividade> atividades;
-    private List<Cupom> cupons;
-    private List<Tag> tags;
+    private List<Atividade> atividades = new ArrayList<>();
+    private List<Cupom> cupons = new ArrayList<>();
+    private List<Tag> tags  = new ArrayList<>();
     private String keyCriador;
 
     public Evento() {
@@ -39,9 +39,6 @@ public class Evento {
         this.statusDoEvento = "Aberto";
         this.quantPessoas = quantPessoas;
         this.keyCriador = keyCriador;
-        this.tags = new ArrayList<>();
-        this.atividades = new ArrayList<>();
-        this.cupons = new ArrayList<>();
     }
 
     public String getKeyCriador() {
