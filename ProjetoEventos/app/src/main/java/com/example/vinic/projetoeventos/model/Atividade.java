@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Atividade {
 
+    private String keyCriador;
+
     private String nome;
     private String tipoAtividade;
     private String horaInicio;
@@ -14,12 +16,22 @@ public class Atividade {
     }
 
 
-    public Atividade(String nome, String tipoAtividade,String horaInicio, String horaTermino, double valor) {
+    public Atividade(String keyCriador, String nome, String tipoAtividade,String horaInicio, String horaTermino, double valor) {
+        this.keyCriador = keyCriador;
         this.nome = nome;
         this.tipoAtividade = tipoAtividade;
         this.horaInicio = horaInicio;
         this.horaTermino = horaTermino;
         this.valor = valor;
+
+    }
+
+    public String getKeyCriador() {
+        return keyCriador;
+    }
+
+    public void setKeyCriador(String keyCriador) {
+        this.keyCriador = keyCriador;
     }
 
     public String getTipoAtividade() {
