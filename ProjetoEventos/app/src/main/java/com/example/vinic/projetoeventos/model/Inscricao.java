@@ -24,6 +24,8 @@ public class Inscricao {
         this.keyEvento = keyEvento;
     }
 
+
+
     public double getValor() {
         return valor;
     }

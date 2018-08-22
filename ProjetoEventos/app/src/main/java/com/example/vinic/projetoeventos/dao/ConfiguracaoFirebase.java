@@ -3,6 +3,8 @@ package com.example.vinic.projetoeventos.dao;
 import android.support.annotation.NonNull;
 
 import com.example.vinic.projetoeventos.app.MainActivity;
+import com.example.vinic.projetoeventos.cases.InscricaoCases;
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Cupom;
 import com.example.vinic.projetoeventos.model.Evento;
@@ -103,6 +105,7 @@ public class ConfiguracaoFirebase {
             if(inscricoes.get(i).getKeyEvento().equals(keyEvento)){
                 String keyInscricao = inscricoes.get(i).getId();
                 inscricoes.get(i).getAtividades().add(atividade);
+                InscricaoCases.calcularValorTotal(inscricoes.get(i));
                 Map<String, Object> inscricaoValues = inscricoes.get(i).toMap();
                 Map<String, Object> childUpdates = new HashMap<>();
                 childUpdates.put("/inscricoes/" + keyInscricao,inscricaoValues);
@@ -113,6 +116,7 @@ public class ConfiguracaoFirebase {
         String keyInscricao = ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").push().getKey();
         inscricao.setId(keyInscricao);
         inscricao.getAtividades().add(atividade);
+        InscricaoCases.calcularValorTotal(inscricao);
         Map<String, Object> inscricaoValues = inscricao.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/inscricoes/" + keyInscricao,inscricaoValues);
@@ -124,6 +128,7 @@ public class ConfiguracaoFirebase {
     public static void salvarAtividadeFirebase(Evento evento,Atividade atividade){
         String keyEvent = evento.getId();
         atividade.setKeyCriador(evento.getKeyCriador());
+        atividade.setKeyEvento(evento.getId());
         evento.getAtividades().add(atividade);
         Map<String, Object> eventoValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
