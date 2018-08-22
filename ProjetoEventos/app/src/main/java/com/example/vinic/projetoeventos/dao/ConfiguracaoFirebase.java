@@ -98,7 +98,7 @@ public class ConfiguracaoFirebase {
         });
     }
 
-    public static boolean inserirAtividadeNaInscricoes(String keyUsuario,String keyEvento,Atividade atividade){
+    public static boolean salvarInscricaoFirebase(String keyUsuario,String keyEvento,Atividade atividade,Inscricao inscricao){
         for (int i = 0; i < inscricoes.size(); i++) {
             if(inscricoes.get(i).getKeyEvento().equals(keyEvento)){
                 String keyInscricao = inscricoes.get(i).getId();
@@ -111,7 +111,7 @@ public class ConfiguracaoFirebase {
             }
         }
         String keyInscricao = ConfiguracaoFirebase.getDatabaseReference().child("inscricoes").push().getKey();
-        Inscricao inscricao = new Inscricao(keyEvento,keyUsuario,keyEvento);
+        inscricao.setId(keyInscricao);
         inscricao.getAtividades().add(atividade);
         Map<String, Object> inscricaoValues = inscricao.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
