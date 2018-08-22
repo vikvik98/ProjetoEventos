@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 
 
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void realizarLogin() {
         String emailUsuario = editTextEmail.getText().toString();
-        MainActivity.usuarioLogado = ConfiguracaoFirebase.logarUsuario(emailUsuario);
+        MainActivity.usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
         Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         first();

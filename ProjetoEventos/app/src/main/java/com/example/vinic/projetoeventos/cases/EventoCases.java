@@ -4,12 +4,19 @@ import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 
 import com.example.vinic.projetoeventos.model.Evento;
 
+import java.util.Date;
 
 
 public class EventoCases {
 
 
+    public static boolean cadastrarEvento(String nome, String tipo, String local, Date dataInicio, Date dataFinal, int quant, String key){
 
+        Evento evento = new Evento(nome,tipo,local,dataInicio,dataFinal,quant,key);
+        ConfiguracaoFirebase.salvarEventoFirebase(evento);
+        return true;
+
+    }
 
 
 

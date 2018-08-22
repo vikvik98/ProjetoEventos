@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.CupomCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
@@ -142,7 +143,7 @@ public class EventoActivity extends AppCompatActivity {
                             Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
                             Date dataInicioCupom = format.parse(format.format(hoje));
                             for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++){
-                                ConfiguracaoFirebase.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
+                                CupomCases.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
