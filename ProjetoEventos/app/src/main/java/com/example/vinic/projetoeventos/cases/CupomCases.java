@@ -11,6 +11,7 @@ public class CupomCases {
     public static void cadastrarCupom(Evento evento,String codigo, int quant, Date dataInicio, Date dataFinal, double percentual){
         Cupom cupom = new Cupom(codigo,quant,dataInicio,dataFinal,percentual);
         ConfiguracaoFirebase.salvarCupomFirebase(evento,cupom);
+
     }
 
 }
