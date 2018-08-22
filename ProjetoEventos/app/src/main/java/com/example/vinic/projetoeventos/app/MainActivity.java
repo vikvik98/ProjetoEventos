@@ -38,11 +38,20 @@ public class MainActivity extends AppCompatActivity
     private List<Evento> eventos = new ArrayList<>();
     private FloatingActionButton addEvento;
     public static Usuario usuarioLogado;
+    private SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+
+        shared = getSharedPreferences("event",MODE_PRIVATE);
+        String emailUsuario = shared.getString("usuario", "nenhum");
+        if(estaLogado(emailUsuario)){
+            usuarioLogado = ConfiguracaoFirebase.logarUsuario(emailUsuario);
+        }else{
+            startActivity(new Intent(this, LoginActivity.class));
+        }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,8 +68,8 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences shared = getSharedPreferences("event",MODE_PRIVATE);
         boolean first = shared.getBoolean("first", false);
+        String volta = shared.getString("volta", "nenhum");
 
         if (first){
 
@@ -70,6 +79,10 @@ public class MainActivity extends AppCompatActivity
             editor.putBoolean("first", false);
             editor.commit();
             editor.apply();
+        }else if (volta.equals("inscricao")){
+            reloadData(pegarEventos(usuarioLogado));
+        }else if (volta.equals("evento")){
+            reloadData(pegarMeusEventos(usuarioLogado));
         }
 
     }
@@ -151,7 +164,10 @@ public class MainActivity extends AppCompatActivity
             //robherty
 
         } else if (id == R.id.nav_sair) {
-            usuarioLogado = null;
+            SharedPreferences.Editor editor = shared.edit();
+            editor.clear();
+            editor.commit();
+            editor.apply();
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
@@ -163,6 +179,15 @@ public class MainActivity extends AppCompatActivity
 
     public void adicionandoEvento(View view) {
         startActivityForResult(new Intent(this, CadastrarEventoActivity.class), 1);
+    }
+
+    public boolean estaLogado(String emailUsuario){
+        if(emailUsuario.equals("nenhum")){
+            return false;
+        }else {
+            return true;
+        }
+
     }
 
     @Override
