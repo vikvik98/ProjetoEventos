@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -50,6 +53,7 @@ public class EventoActivity extends AppCompatActivity {
 
         setupViews();
 
+
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
 
@@ -85,33 +89,17 @@ public class EventoActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_cupom, menu);
+        return true;
+    }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-        reloadData();
-    }
-
-    private void reloadData() {
-
-        adapter = new ListaAtividadesRVAdapter(this,atividades);
-        rvAtividades.setAdapter(adapter);
-        rvAtividades.setLayoutManager(new LinearLayoutManager(EventoActivity.this));
-
-    }
-
-    public void adicionarAtividade(View view) {
-        Intent intent = new Intent(this, CadastrarAtividadeActivity.class).putExtra("id",evento.getId());
-        startActivity(intent);
-    }
-
-    public void gerarCupom(View view){
-        Cupom cupom = null;
+    public boolean onOptionsItemSelected(MenuItem item) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
-
-
 
         EditText quantidadeCupons = inflate.findViewById(R.id.cupom_quant);
         spinner = inflate.findViewById(R.id.spinnerCupom);
@@ -126,11 +114,11 @@ public class EventoActivity extends AppCompatActivity {
                     @Override
 
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (spinner.getSelectedItemPosition() == 0){
+                        if (spinner.getSelectedItemPosition() == 0) {
                             porcentagem = 0.5;
-                        }else if(spinner.getSelectedItemPosition() == 1){
+                        } else if (spinner.getSelectedItemPosition() == 1) {
                             porcentagem = 0.25;
-                        }else{
+                        } else {
                             porcentagem = 0.5;
                         }
 
@@ -141,8 +129,8 @@ public class EventoActivity extends AppCompatActivity {
                         try {
                             Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
                             Date dataInicioCupom = format.parse(format.format(hoje));
-                            for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++){
-                                ConfiguracaoFirebase.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
+                            for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++) {
+                                ConfiguracaoFirebase.cadastrarCupom(evento, dataInicioCupom, dataTerminoCupom, porcentagem);
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -158,6 +146,26 @@ public class EventoActivity extends AppCompatActivity {
                 });
         builder.create();
         builder.show();
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadData();
+    }
+
+    private void reloadData() {
+
+        adapter = new ListaAtividadesRVAdapter(this,atividades);
+        rvAtividades.setAdapter(adapter);
+        rvAtividades.setLayoutManager(new LinearLayoutManager(EventoActivity.this));
+
+    }
+
+    public void adicionarAtividade(View view) {
+        Intent intent = new Intent(this, CadastrarAtividadeActivity.class).putExtra("id",evento.getId());
+        startActivity(intent);
     }
 
     public void pegarData(View view) {

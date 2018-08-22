@@ -37,14 +37,29 @@
     </LinearLayout>
 
 
-    <EditText
-        android:id="@+id/cupom_quant"
-        android:layout_gravity="center"
-        android:inputType="numberDecimal"
-        android:background="@drawable/edit_text_mod"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/quantidade_de_cupons"/>
+        android:orientation="horizontal" >
+
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/cupom_quant"
+            android:layout_gravity="center"
+            android:inputType="number"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/quantidade_de_cupons"/>
+
+        <EditText
+            android:id="@+id/padrao_cupom"
+            android:hint="Padrão do cupom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_text_mod"/>
+    </LinearLayout>
 
 
 

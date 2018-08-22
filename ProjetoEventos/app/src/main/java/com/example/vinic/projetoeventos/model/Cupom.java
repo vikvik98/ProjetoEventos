@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class Cupom {
 
-    private static int numero = 1;
-    private final int numeroFinal = this.numero;
+    private String codigo;
+    private int quant;
     private Date inicio;
     private Date termino;
     private double porcentagem;
@@ -17,28 +17,29 @@ public class Cupom {
     public Cupom() {
     }
 
-    public Cupom(Date inicio, Date termino, double porcentagem) {
+    public Cupom(String codigo,int quant, Date inicio, Date termino, double porcentagem) {
+        this.codigo = codigo;
+        this.quant = quant;
         this.inicio = inicio;
         this.termino = termino;
         this.porcentagem = porcentagem;
-        mudarCodigo();
 
     }
 
-    private void mudarCodigo(){
-        numero++;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public static int getNumero() {
-        return numero;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public static void setNumero(int numero) {
-        Cupom.numero = numero;
+    public int getQuant() {
+        return quant;
     }
 
-    public int getNumeroFinal() {
-        return numeroFinal;
+    public void setQuant(int quant) {
+        this.quant = quant;
     }
 
     public Date getInicio() {
