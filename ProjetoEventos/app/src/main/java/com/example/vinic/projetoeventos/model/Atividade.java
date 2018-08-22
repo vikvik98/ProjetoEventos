@@ -5,7 +5,7 @@ import java.util.Date;
 public class Atividade {
 
     private String keyCriador;
-
+    private String keyEvento;
     private String nome;
     private String tipoAtividade;
     private String horaInicio;
@@ -35,6 +35,14 @@ public class Atividade {
 
     public String getTipoAtividade() {
         return tipoAtividade;
+    }
+
+    public String getKeyEvento() {
+        return keyEvento;
+    }
+
+    public void setKeyEvento(String keyEvento) {
+        this.keyEvento = keyEvento;
     }
 
     public void setTipoAtividade(String tipoAtividade) {

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.MainActivity;
+import com.example.vinic.projetoeventos.cases.InscricaoCases;
 import com.example.vinic.projetoeventos.model.Atividade;
 
 import java.util.List;
@@ -48,14 +49,16 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
             holder.cbInscricao.setVisibility(View.GONE);
         }else{
             holder.cbInscricao.setVisibility(View.VISIBLE);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(),atividade.getKeyEvento(),atividade);
+                }
+            });
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //O Que fazer quando clickar no card...
-            }
-        });
+
     }
 
     @Override
