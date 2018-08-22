@@ -45,6 +45,7 @@ public class EventoActivity extends AppCompatActivity {
     private double porcentagem;
     private Calendar dataCupom;
     private TextView tvDataTerminoCupom;
+    private EditText edPadraoCupom;
 
 
     @Override
@@ -85,8 +86,10 @@ public class EventoActivity extends AppCompatActivity {
         tvEventoData = findViewById(R.id.lista_atividade_data);
         tvEventoLocal = findViewById(R.id.lista_atividade_local);
         tvDataTerminoCupom = findViewById(R.id.data_termino_cupom);
+
         atividades = new ArrayList<>();
         dataCupom = Calendar.getInstance();
+
 
     }
 
@@ -105,6 +108,7 @@ public class EventoActivity extends AppCompatActivity {
         EditText quantidadeCupons = inflate.findViewById(R.id.cupom_quant);
         spinner = inflate.findViewById(R.id.spinnerCupom);
         tvDataTerminoCupom = inflate.findViewById(R.id.data_termino_cupom);
+        EditText cupomName = inflate.findViewById(R.id.padrao_cupom);
 
 
         builder.setTitle("Gerar cumpons: ");
@@ -130,9 +134,9 @@ public class EventoActivity extends AppCompatActivity {
                         try {
                             Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
                             Date dataInicioCupom = format.parse(format.format(hoje));
-                            for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++){
-                                CupomCases.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
-                            }
+                            int quantidade = Integer.parseInt(quantidadeCupons.getText().toString());
+                            String padrao = cupomName.getText().toString();
+                            CupomCases.cadastrarCupom(evento,padrao,quantidade,dataInicioCupom,dataTerminoCupom,porcentagem);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
