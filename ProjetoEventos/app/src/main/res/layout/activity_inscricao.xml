@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".app.InscricaoActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/bt_inscricao_selecionar"
+        android:layout_gravity="center"
+
+        android:text="SELECIONAR TUDO"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+
+        android:layout_width="270dp"
+        android:layout_height="30dp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:onClick="selecionarTudo"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_inscricao"
+        android:layout_width="match_parent"
+        android:layout_height="360dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <Button
+        android:id="@+id/bt_inscricao_confirmar"
+        android:layout_gravity="center"
+
+        android:text="Confirmar"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+
+
+        android:layout_width="270dp"
+        android:layout_height="30dp"
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
+        android:onClick="confirmarInscricao"
+        />
+</LinearLayout>

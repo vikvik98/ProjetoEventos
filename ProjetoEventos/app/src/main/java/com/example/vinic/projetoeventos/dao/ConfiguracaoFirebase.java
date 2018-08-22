@@ -132,7 +132,7 @@ public class ConfiguracaoFirebase {
 
     public static void cadastrarAtividade(Evento evento,String nome,String tipoAtividade,String horaInicio,String horaTermino,double valor){
         String keyEvent = evento.getId();
-        Atividade atividade = new Atividade(nome,tipoAtividade,horaInicio,horaTermino,valor);
+        Atividade atividade = new Atividade(evento.getKeyCriador(),nome,tipoAtividade,horaInicio,horaTermino,valor);
         evento.getAtividades().add(atividade);
         Map<String, Object> eventoValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();

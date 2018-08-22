@@ -1,20 +1,25 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Evento;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InscricaoActivity extends AppCompatActivity {
 
-    RecyclerView rvAtividades;
+    RecyclerView rvInscricao;
     TextView tvEventoNome;
     TextView tvEventoData;
     TextView tvEventoLocal;
@@ -26,5 +31,47 @@ public class InscricaoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inscricao);
+        setupViews();
+
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+
+        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++) {
+            if (ConfiguracaoFirebase.eventosList.get(i).getId().equals(id)) {
+                evento = ConfiguracaoFirebase.eventosList.get(i);
+                break;
+            }
+        }
+
+        atividades = evento.getAtividades();
+
+
+        //getActionBar().setTitle(evento.getNome());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    reloadData();
+    }
+
+    private void setupViews() {
+        rvInscricao = findViewById(R.id.rv_inscricao);
+        atividades = new ArrayList<>();
+
+    }
+
+    private void reloadData() {
+
+        adapter = new ListaAtividadesRVAdapter(this,atividades);
+        rvInscricao.setAdapter(adapter);
+        rvInscricao.setLayoutManager(new LinearLayoutManager(InscricaoActivity.this));
+
+    }
+
+    public void confirmarInscricao(View view) {
+    }
+
+    public void selecionarTudo(View view) {
     }
 }

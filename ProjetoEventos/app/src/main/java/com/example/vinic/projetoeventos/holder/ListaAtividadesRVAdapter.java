@@ -6,9 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.model.Atividade;
 
 import java.util.List;
@@ -42,6 +44,12 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
         holder.tvAtividadesNome.setText(atividade.getNome());
         holder.tvAtividadesdata.setText(atividade.getHoraInicio());
 
+        if(atividade.getKeyCriador().equals(MainActivity.usuarioLogado.getId())){
+            holder.cbInscricao.setVisibility(View.GONE);
+        }else{
+            holder.cbInscricao.setVisibility(View.VISIBLE);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,12 +67,14 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
     public static class ViewHolder extends RecyclerView.ViewHolder{
         protected TextView tvAtividadesNome;
         protected  TextView tvAtividadesdata;
+        protected CheckBox cbInscricao;
 
         public ViewHolder(View itemView){
             super(itemView);
 
             tvAtividadesNome = (TextView) itemView.findViewById(R.id.nome_atividade);
             tvAtividadesdata = (TextView) itemView.findViewById(R.id.data_atividade);
+            cbInscricao = itemView.findViewById(R.id.checkbox_inscricao);
         }
 
     }
