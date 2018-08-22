@@ -9,8 +9,9 @@
 
 
     <TextView
+        android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textAlignment="center"
         android:textStyle="bold"
@@ -24,39 +25,41 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Local:"
+            android:text="Local: "
             android:textSize="20sp"
             android:layout_marginLeft="10dp"
-            android:textStyle="bold" />
+             />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/lista_atividade_local"
-            android:textSize="15sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data:"
+            android:text="Data: "
             android:textSize="20sp"
-            android:textStyle="bold"
             android:layout_marginLeft="5dp"/>
+
         <TextView
+
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/lista_atividade_data"
-            android:textSize="15sp"/>
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+
 
     </LinearLayout>
+
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:text="Gerar cupom"
-            android:onClick="gerarCupom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -65,9 +68,9 @@
             android:layout_marginTop="5dp">
 
 
-
-
         </android.support.v7.widget.RecyclerView>
+
+
 
         <android.support.design.widget.FloatingActionButton
             android:layout_width="wrap_content"
@@ -77,8 +80,9 @@
             android:src="@drawable/ic_add"
             app:layout_anchorGravity="bottom|right|end"
             android:onClick="adicionarAtividade" />
-    </android.support.design.widget.CoordinatorLayout>
 
+
+    </android.support.design.widget.CoordinatorLayout>
 
 
 </LinearLayout>

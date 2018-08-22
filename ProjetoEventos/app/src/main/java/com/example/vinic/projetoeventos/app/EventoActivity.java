@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -42,6 +45,7 @@ public class EventoActivity extends AppCompatActivity {
     private double porcentagem;
     private Calendar dataCupom;
     private TextView tvDataTerminoCupom;
+    private EditText edPadraoCupom;
 
 
     @Override
@@ -50,6 +54,7 @@ public class EventoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_evento);
 
         setupViews();
+
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
@@ -81,42 +86,29 @@ public class EventoActivity extends AppCompatActivity {
         tvEventoData = findViewById(R.id.lista_atividade_data);
         tvEventoLocal = findViewById(R.id.lista_atividade_local);
         tvDataTerminoCupom = findViewById(R.id.data_termino_cupom);
+
         atividades = new ArrayList<>();
         dataCupom = Calendar.getInstance();
 
-    }
 
+    }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
-        reloadData();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_cupom, menu);
+        return true;
     }
 
-    private void reloadData() {
-
-        adapter = new ListaAtividadesRVAdapter(this,atividades);
-        rvAtividades.setAdapter(adapter);
-        rvAtividades.setLayoutManager(new LinearLayoutManager(EventoActivity.this));
-
-    }
-
-    public void adicionarAtividade(View view) {
-        Intent intent = new Intent(this, CadastrarAtividadeActivity.class).putExtra("id",evento.getId());
-        startActivity(intent);
-    }
-
-    public void gerarCupom(View view){
-        Cupom cupom = null;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
-
-
 
         EditText quantidadeCupons = inflate.findViewById(R.id.cupom_quant);
         spinner = inflate.findViewById(R.id.spinnerCupom);
         tvDataTerminoCupom = inflate.findViewById(R.id.data_termino_cupom);
+        EditText cupomName = inflate.findViewById(R.id.padrao_cupom);
 
 
         builder.setTitle("Gerar cumpons: ");
@@ -127,11 +119,11 @@ public class EventoActivity extends AppCompatActivity {
                     @Override
 
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (spinner.getSelectedItemPosition() == 0){
+                        if (spinner.getSelectedItemPosition() == 0) {
                             porcentagem = 0.5;
-                        }else if(spinner.getSelectedItemPosition() == 1){
+                        } else if (spinner.getSelectedItemPosition() == 1) {
                             porcentagem = 0.25;
-                        }else{
+                        } else {
                             porcentagem = 0.5;
                         }
 
@@ -142,9 +134,9 @@ public class EventoActivity extends AppCompatActivity {
                         try {
                             Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
                             Date dataInicioCupom = format.parse(format.format(hoje));
-                            for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++){
-                                CupomCases.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
-                            }
+                            int quantidade = Integer.parseInt(quantidadeCupons.getText().toString());
+                            String padrao = cupomName.getText().toString();
+                            CupomCases.cadastrarCupom(evento,padrao,quantidade,dataInicioCupom,dataTerminoCupom,porcentagem);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
@@ -159,6 +151,26 @@ public class EventoActivity extends AppCompatActivity {
                 });
         builder.create();
         builder.show();
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        reloadData();
+    }
+
+    private void reloadData() {
+
+        adapter = new ListaAtividadesRVAdapter(this,atividades);
+        rvAtividades.setAdapter(adapter);
+        rvAtividades.setLayoutManager(new LinearLayoutManager(EventoActivity.this));
+
+    }
+
+    public void adicionarAtividade(View view) {
+        Intent intent = new Intent(this, CadastrarAtividadeActivity.class).putExtra("id",evento.getId());
+        startActivity(intent);
     }
 
     public void pegarData(View view) {
