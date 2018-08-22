@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,7 +47,7 @@ public class CadastrarEventoActivity extends AppCompatActivity {
             try {
                 Date dataEventoInicio = format.parse(textViewDataInicio.getText().toString());
                 Date dataEventoFinal = format.parse(textViewDataFinal.getText().toString());
-                EventoCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, MainActivity.usuarioLogado.getId());
+                ConfiguracaoFirebase.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, MainActivity.usuarioLogado.getId());
                 finish();
             } catch (ParseException e) {
                 e.printStackTrace();

@@ -8,8 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.cases.UsuarioCases;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -22,8 +21,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setupViews();
-        UsuarioCases.pegarUsuariosNoFirebase();
-        EventoCases.pegarEventosNoFirebase();
+        ConfiguracaoFirebase.pegarUsuariosNoFirebase();
+        ConfiguracaoFirebase.pegarEventosNoFirebase();
     }
 
 
@@ -31,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
         boolean existe = false;
 
-        for (int i = 0; i < UsuarioCases.usuarios.size(); i++) {
+        for (int i = 0; i < ConfiguracaoFirebase.usuarios.size(); i++) {
             existe = isExiste(existe, i);
 
             if (existe){
@@ -48,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void realizarLogin() {
         String emailUsuario = editTextEmail.getText().toString();
-        MainActivity.usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
+        MainActivity.usuarioLogado = ConfiguracaoFirebase.logarUsuario(emailUsuario);
         Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
         first();
@@ -56,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private boolean isExiste(boolean existe, int i) {
-        if(UsuarioCases.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
-            if(UsuarioCases.usuarios.get(i).getSenha().equals(editTextSenha.getText().toString())){
+        if(ConfiguracaoFirebase.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
+            if(ConfiguracaoFirebase.usuarios.get(i).getSenha().equals(editTextSenha.getText().toString())){
                 existe = true;
             }
         }

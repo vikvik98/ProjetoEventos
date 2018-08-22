@@ -9,7 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.cases.UsuarioCases;
+import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 
 public class CadastroUsuarioActivity extends AppCompatActivity {
 
@@ -33,9 +33,9 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         boolean existe = false;
 
         if (verificarCamposVazios()){
-            for (int i = 0; i < UsuarioCases.usuarios.size(); i++) {
+            for (int i = 0; i < ConfiguracaoFirebase.usuarios.size(); i++) {
 
-                if(UsuarioCases.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
+                if(ConfiguracaoFirebase.usuarios.get(i).getEmail().equals(editTextEmail.getText().toString())){
                     Toast.makeText(this, "Este email já está cadastrado", Toast.LENGTH_SHORT).show();
                     existe = true;
                 }
@@ -49,7 +49,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                 }
             }
 
-            else if (UsuarioCases.usuarios.size() == 0){
+            else if (ConfiguracaoFirebase.usuarios.size() == 0){
                 realizarLogin();
             }
         }
@@ -68,7 +68,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         String senhaUsuario = editTextSenha.getText().toString();
         String emailUsuario = editTextEmail.getText().toString();
 
-        UsuarioCases.cadastrarUsuario(nomeUsuario,senhaUsuario,emailUsuario);
+        ConfiguracaoFirebase.cadastrarUsuario(nomeUsuario,senhaUsuario,emailUsuario);
 
         Toast.makeText(this, "Usuario cadastrado!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));
