@@ -28,9 +28,8 @@ public class Evento {
 
     }
 
-    public Evento(String id, String nome, String tipoEvento, String local, Date dataInicio, Date dataFinal, int quantPessoas, String keyCriador) {
+    public Evento( String nome, String tipoEvento, String local, Date dataInicio, Date dataFinal, int quantPessoas, String keyCriador) {
 
-        this.id = id;
         this.nome = nome;
         this.dataInicial = dataInicio;
         this.dataFinal = dataFinal;

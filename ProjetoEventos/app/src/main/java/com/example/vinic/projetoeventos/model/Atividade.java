@@ -16,8 +16,7 @@ public class Atividade {
     }
 
 
-    public Atividade(String keyCriador, String nome, String tipoAtividade,String horaInicio, String horaTermino, double valor) {
-        this.keyCriador = keyCriador;
+    public Atividade(String nome, String tipoAtividade,String horaInicio, String horaTermino, double valor) {
         this.nome = nome;
         this.tipoAtividade = tipoAtividade;
         this.horaInicio = horaInicio;

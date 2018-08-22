@@ -47,7 +47,7 @@ public class CadastrarEventoActivity extends AppCompatActivity {
             try {
                 Date dataEventoInicio = format.parse(textViewDataInicio.getText().toString());
                 Date dataEventoFinal = format.parse(textViewDataFinal.getText().toString());
-                ConfiguracaoFirebase.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, MainActivity.usuarioLogado.getId());
+                EventoCases.cadastrarEvento(nomeEvento,tipoEvento,localEvento,dataEventoInicio,dataEventoFinal,quantPessoas, MainActivity.usuarioLogado.getId());
                 finish();
             } catch (ParseException e) {
                 e.printStackTrace();

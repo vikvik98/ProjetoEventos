@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.AtividadeCases;
 import com.example.vinic.projetoeventos.cases.EventoCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.model.Evento;
@@ -95,7 +96,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
             String horaInicioAtividade = horaInicio.getText().toString();
             String horaTerminoAtivade = horaFinal.getText().toString();
             double valorAtividade = Double.parseDouble(valor.getText().toString());
-            ConfiguracaoFirebase.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
+            AtividadeCases.cadastrarAtividade(evento,nomeAtividade,tipoAtividade,horaInicioAtividade,horaTerminoAtivade,valorAtividade);
             Toast.makeText(this, "Atividade cadastrada.", Toast.LENGTH_SHORT).show();
             finish();
 

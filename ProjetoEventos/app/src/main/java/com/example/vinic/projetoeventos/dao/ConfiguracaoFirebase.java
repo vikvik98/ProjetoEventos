@@ -44,29 +44,20 @@ public class ConfiguracaoFirebase {
     }
 
 
-    public static Boolean cadastrarUsuario(String nome, String senha, String email){
+    public static Boolean salvarUsuarioFirebase(Usuario usuario){
         String keyUser = ConfiguracaoFirebase.getDatabaseReference().child("usuarios").push().getKey();
-        Usuario usuario = new Usuario(keyUser,nome,senha,email);
+        usuario.setId(keyUser);
         Map<String, Object> usuarioValues = usuario.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/usuarios/" + keyUser,usuarioValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
-        MainActivity.usuarioLogado = usuario;
         return true;
 
     }
 
-    public static Usuario logarUsuario(String email){
-        for (int i = 0; i < usuarios.size(); i++) {
-            if(usuarios.get(i).getEmail().equals(email)){
-                return usuarios.get(i);
-            }
-        }
-        return null;
-    }
 
 
-    //TODO: perguntar para o prof se faz mais sentido retornar uma lista de usuarios ou colocar dentro de um atributo.
+
     public static void pegarUsuariosNoFirebase(){
         usuarios = new ArrayList<>();
 
@@ -130,9 +121,9 @@ public class ConfiguracaoFirebase {
     }
 
 
-    public static void cadastrarAtividade(Evento evento,String nome,String tipoAtividade,String horaInicio,String horaTermino,double valor){
+    public static void salvarAtividadeFirebase(Evento evento,Atividade atividade){
         String keyEvent = evento.getId();
-        Atividade atividade = new Atividade(evento.getKeyCriador(),nome,tipoAtividade,horaInicio,horaTermino,valor);
+        atividade.setKeyCriador(evento.getKeyCriador());
         evento.getAtividades().add(atividade);
         Map<String, Object> eventoValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
@@ -141,9 +132,9 @@ public class ConfiguracaoFirebase {
 
     }
 
-    public static boolean cadastrarEvento(String nome, String tipo, String local, Date dataInicio, Date dataFinal, int quant, String key){
+    public static boolean salvarEventoFirebase(Evento evento){
         String keyEvent = ConfiguracaoFirebase.getDatabaseReference().child("eventos").push().getKey();
-        Evento evento = new Evento(keyEvent,nome,tipo,local,dataInicio,dataFinal,quant,key);
+        evento.setId(keyEvent);
         Map<String, Object> eventoValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/eventos/" + keyEvent,eventoValues);
@@ -170,9 +161,8 @@ public class ConfiguracaoFirebase {
         });
     }
 
-    public static void cadastrarCupom(Evento evento,Date dataInicio, Date dataFinal, double percentual){
+    public static void salvarCupomFirebase(Evento evento,Cupom cupom){
         String keyEvent = evento.getId();
-        Cupom cupom = new Cupom(dataInicio,dataFinal,percentual);
         evento.getCupons().add(cupom);
         Map<String, Object> eventoValues = evento.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
