@@ -126,7 +126,6 @@ public class EventoActivity extends AppCompatActivity {
                     @Override
 
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //ConfiguracaoFirebase.cadastrarCupom();
                         if (spinner.getSelectedItemPosition() == 0){
                             porcentagem = 0.5;
                         }else if(spinner.getSelectedItemPosition() == 1){
@@ -145,10 +144,16 @@ public class EventoActivity extends AppCompatActivity {
                             for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++){
                                 ConfiguracaoFirebase.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
                             }
-                            finish();
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+                    }
+                })
+
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
                     }
                 });
         builder.create();
