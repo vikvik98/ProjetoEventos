@@ -104,6 +104,8 @@ public class Evento {
         result.put("atividades", atividades);
         result.put("tags", tags);
         result.put("keyCriador", keyCriador);
+        result.put("cupons", cupons);
+
 
         return result;
     }

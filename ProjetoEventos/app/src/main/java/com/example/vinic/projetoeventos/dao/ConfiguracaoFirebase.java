@@ -27,6 +27,13 @@ import java.util.Map;
 public class ConfiguracaoFirebase {
 
     public static DatabaseReference database;
+    public static DatabaseReference databaseReferenceEvento = getDatabaseReference().child("eventos");
+    public static DatabaseReference databaseReference = ConfiguracaoFirebase.getDatabaseReference().child("usuarios");
+    public static DatabaseReference databaseReferenceInscricao = getDatabaseReference().child("inscricoes");
+    public static List<Evento> eventosList;
+    public static List<Usuario> usuarios;
+    public static List<Inscricao> inscricoes;
+
 
     public static DatabaseReference getDatabaseReference() {
         if (database == null) {
@@ -35,13 +42,6 @@ public class ConfiguracaoFirebase {
         return database;
 
     }
-
-    public static DatabaseReference databaseReferenceEvento = getDatabaseReference().child("eventos");
-    public static List<Evento> eventosList;
-    public static List<Usuario> usuarios;
-    public static DatabaseReference databaseReference = ConfiguracaoFirebase.getDatabaseReference().child("usuarios");
-    public static List<Inscricao> inscricoes;
-    public static DatabaseReference databaseReferenceInscricao = getDatabaseReference().child("inscricoes");
 
 
     public static Boolean cadastrarUsuario(String nome, String senha, String email){
@@ -170,7 +170,7 @@ public class ConfiguracaoFirebase {
         });
     }
 
-    public static void cadastrarCupom(Evento evento,Date dataInicio, Date dataFinal, int percentual){
+    public static void cadastrarCupom(Evento evento,Date dataInicio, Date dataFinal, double percentual){
         String keyEvent = evento.getId();
         Cupom cupom = new Cupom(dataInicio,dataFinal,percentual);
         evento.getCupons().add(cupom);
@@ -178,7 +178,6 @@ public class ConfiguracaoFirebase {
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/eventos/" + keyEvent,eventoValues);
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
-
     }
 
 

@@ -34,12 +34,20 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="desconto">Porcentagem de desconto</string>
+    <string name="quantidade_de_cupons">Quantidade de cupons</string>
 
 
     <string-array name="porcentagens">
         <item>5%</item>
         <item>25%</item>
         <item>50%</item>
+    </string-array>
+
+    <string-array name="local">
+        <item>Prédio</item>
+        <item>Sala</item>
+        <item>Auditorio</item>
+        <item>Laboratório</item>
     </string-array>
 
 </resources>

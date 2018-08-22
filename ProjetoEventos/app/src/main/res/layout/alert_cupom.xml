@@ -5,19 +5,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/data_termino_cupom"
+            android:textSize="15sp"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data de termino da validade"
+            android:onClick="pegarData" />
+
+        <Spinner
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:id="@+id/spinnerCupom"
+            android:background="@drawable/edit_text_mod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/porcentagens"
+            android:prompt="@string/desconto" />
+
+
+    </LinearLayout>
+
+
     <EditText
+        android:id="@+id/cupom_quant"
+        android:layout_gravity="center"
+        android:inputType="numberDecimal"
+        android:background="@drawable/edit_text_mod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Quantidade de cupons"/>
+        android:hint="@string/quantidade_de_cupons"/>
 
-    <Spinner
-        android:id="@+id/spinnerCupom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/porcentagens"
-        android:prompt="@string/desconto" >
 
-    </Spinner>
+
 
 
 

@@ -12,12 +12,12 @@ public class Cupom {
     private final int numeroFinal = this.numero;
     private Date inicio;
     private Date termino;
-    private float porcentagem;
+    private double porcentagem;
 
     public Cupom() {
     }
 
-    public Cupom(Date inicio, Date termino, float porcentagem) {
+    public Cupom(Date inicio, Date termino, double porcentagem) {
         this.inicio = inicio;
         this.termino = termino;
         this.porcentagem = porcentagem;
@@ -26,17 +26,42 @@ public class Cupom {
     }
 
     private void mudarCodigo(){
-        this.numero++;
+        numero++;
     }
 
-    @Exclude
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("numeroFinal", numeroFinal);
-        result.put("inicio", inicio);
-        result.put("termino", termino);
-        result.put("porcentagem", porcentagem);
+    public static int getNumero() {
+        return numero;
+    }
 
-        return result;
+    public static void setNumero(int numero) {
+        Cupom.numero = numero;
+    }
+
+    public int getNumeroFinal() {
+        return numeroFinal;
+    }
+
+    public Date getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(Date inicio) {
+        this.inicio = inicio;
+    }
+
+    public Date getTermino() {
+        return termino;
+    }
+
+    public void setTermino(Date termino) {
+        this.termino = termino;
+    }
+
+    public double getPorcentagem() {
+        return porcentagem;
+    }
+
+    public void setPorcentagem(double porcentagem) {
+        this.porcentagem = porcentagem;
     }
 }

@@ -11,9 +11,7 @@ public class EventoCases {
 
 
 
-    public void addCupom(float porcentagem, int quantidade){
 
-    }
 
     public static Evento pegarEvento(String id){
         for (int i = 0; i <= ConfiguracaoFirebase.eventosList.size()-1; i++) {
