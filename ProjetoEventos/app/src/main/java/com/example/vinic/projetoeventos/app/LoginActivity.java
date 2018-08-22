@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         ConfiguracaoFirebase.pegarUsuariosNoFirebase();
         ConfiguracaoFirebase.pegarEventosNoFirebase();
         ConfiguracaoFirebase.pegarInscricoesNoFirebase();
+
     }
 
 
@@ -49,11 +50,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void realizarLogin() {
         String emailUsuario = editTextEmail.getText().toString();
-        SharedPreferences mPreferences = getSharedPreferences("event", MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString("usuario", emailUsuario);
-        editor.commit();
-        editor.apply();
         MainActivity.usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
         Toast.makeText(this, "Usuario logado com sucesso!", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, MainActivity.class));

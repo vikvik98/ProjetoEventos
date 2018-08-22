@@ -46,17 +46,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
-        shared = getSharedPreferences("event",MODE_PRIVATE);
-        String emailUsuario = shared.getString("usuario", "nenhum");
-
-        Toast.makeText(this, emailUsuario, Toast.LENGTH_SHORT).show();
-
-        if(estaLogado(emailUsuario)){
-            usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
-        }else{
-            startActivity(new Intent(this, LoginActivity.class));
-        }
-
+        shared = getSharedPreferences("event", MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupDrawer(toolbar);
@@ -168,10 +158,7 @@ public class MainActivity extends AppCompatActivity
             //robherty
 
         } else if (id == R.id.nav_sair) {
-            SharedPreferences.Editor editor = shared.edit();
-            editor.clear();
-            editor.commit();
-            editor.apply();
+            usuarioLogado = null;
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
