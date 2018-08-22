@@ -1,5 +1,6 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,11 +18,14 @@ import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
+import com.example.vinic.projetoeventos.model.Cupom;
 import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class EventoActivity extends AppCompatActivity {
@@ -31,6 +37,10 @@ public class EventoActivity extends AppCompatActivity {
     private Evento evento;
     private List<Atividade> atividades;
     private ListaAtividadesRVAdapter adapter;
+    private Spinner spinner;
+    private double porcentagem;
+    private Calendar dataCupom;
+    private TextView tvDataTerminoCupom;
 
 
     @Override
@@ -69,7 +79,10 @@ public class EventoActivity extends AppCompatActivity {
         tvEventoNome = findViewById((R.id.lista_atividade_titulo));
         tvEventoData = findViewById(R.id.lista_atividade_data);
         tvEventoLocal = findViewById(R.id.lista_atividade_local);
+        tvDataTerminoCupom = findViewById(R.id.data_termino_cupom);
         atividades = new ArrayList<>();
+        dataCupom = Calendar.getInstance();
+
     }
 
 
@@ -78,7 +91,6 @@ public class EventoActivity extends AppCompatActivity {
         super.onResume();
         Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show();
         reloadData();
-
     }
 
     private void reloadData() {
@@ -95,8 +107,16 @@ public class EventoActivity extends AppCompatActivity {
     }
 
     public void gerarCupom(View view){
+        Cupom cupom = null;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
+
+
+
+        EditText quantidadeCupons = inflate.findViewById(R.id.cupom_quant);
+        spinner = inflate.findViewById(R.id.spinnerCupom);
+        tvDataTerminoCupom = inflate.findViewById(R.id.data_termino_cupom);
+
 
         builder.setTitle("Gerar cumpons: ");
         builder.setView(inflate)
@@ -106,11 +126,50 @@ public class EventoActivity extends AppCompatActivity {
                     @Override
 
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        //ConfiguracaoFirebase.cadastrarCupom();
+                        if (spinner.getSelectedItemPosition() == 0){
+                            porcentagem = 0.5;
+                        }else if(spinner.getSelectedItemPosition() == 1){
+                            porcentagem = 0.25;
+                        }else{
+                            porcentagem = 0.5;
+                        }
 
-                        Toast.makeText(EventoActivity.this, "Deu bom", Toast.LENGTH_SHORT).show();
+                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+                        Date hoje = new Date();
+                        format.format(hoje);
+
+                        try {
+                            Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
+                            Date dataInicioCupom = format.parse(format.format(hoje));
+                            for (int j = 0; j < Integer.parseInt(quantidadeCupons.getText().toString()); j++){
+                                ConfiguracaoFirebase.cadastrarCupom(evento,dataInicioCupom,dataTerminoCupom,porcentagem);
+                            }
+                            finish();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
         builder.create();
         builder.show();
+    }
+
+    public void pegarData(View view) {
+        int ano = dataCupom.get(Calendar.YEAR);
+        int mes = dataCupom.get(Calendar.MONTH);
+        int dia = dataCupom.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                (datePicker, i, i1, i2) -> {
+                    dataCupom.set(i, i1, i2);
+                    tvDataTerminoCupom.setText(new SimpleDateFormat("dd/MM/yyyy")
+                            .format(dataCupom.getTime()));
+                }, ano, mes, dia);
+
+        datePickerDialog.getDatePicker().setMinDate(evento.getDataInicial().getTime());
+        datePickerDialog.getDatePicker().setMaxDate(evento.getDataFinal().getTime());
+        datePickerDialog.show();
+
     }
 }

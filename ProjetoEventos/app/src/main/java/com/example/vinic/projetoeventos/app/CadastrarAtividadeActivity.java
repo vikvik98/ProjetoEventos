@@ -76,7 +76,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
 
     private void setupViews(){
         nome = findViewById(R.id.nome_atividade);
-        txtDataAtividade = findViewById(R.id.data_evento);
+        txtDataAtividade = findViewById(R.id.add_data_atividade);
         tipo = findViewById(R.id.add_tipo_atividade);
         valor = findViewById(R.id.valor_atividade);
         dataAtividade = Calendar.getInstance();
