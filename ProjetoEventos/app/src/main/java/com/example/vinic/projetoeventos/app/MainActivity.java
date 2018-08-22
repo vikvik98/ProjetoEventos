@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.model.Evento;
@@ -47,8 +48,11 @@ public class MainActivity extends AppCompatActivity
 
         shared = getSharedPreferences("event",MODE_PRIVATE);
         String emailUsuario = shared.getString("usuario", "nenhum");
+
+        Toast.makeText(this, emailUsuario, Toast.LENGTH_SHORT).show();
+
         if(estaLogado(emailUsuario)){
-            usuarioLogado = ConfiguracaoFirebase.logarUsuario(emailUsuario);
+            usuarioLogado = UsuarioCases.logarUsuario(emailUsuario);
         }else{
             startActivity(new Intent(this, LoginActivity.class));
         }

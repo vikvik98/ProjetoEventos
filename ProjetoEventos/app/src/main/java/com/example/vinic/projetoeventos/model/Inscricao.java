@@ -19,8 +19,7 @@ public class Inscricao {
     public Inscricao() {
     }
 
-    public Inscricao(String id,String keyUsuario, String keyEvento) {
-        this.id = id;
+    public Inscricao(String keyUsuario, String keyEvento) {
         this.keyUsuario = keyUsuario;
         this.keyEvento = keyEvento;
     }
