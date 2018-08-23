@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity
 
             addEvento.setVisibility(View.GONE);
             reloadData(ConfiguracaoFirebase.pegarInscricoes(usuarioLogado));
-            Toast.makeText(this, "Xiiiiiii", Toast.LENGTH_SHORT).show();
             
         } else if (id == R.id.nav_tag_interesse) {
 
