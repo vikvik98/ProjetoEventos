@@ -2,6 +2,7 @@ package com.example.vinic.projetoeventos.cases;
 
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
+import com.example.vinic.projetoeventos.model.Tag;
 import com.example.vinic.projetoeventos.model.Usuario;
 
 public class UsuarioCases {
@@ -22,6 +23,11 @@ public class UsuarioCases {
             }
         }
         return null;
+    }
+
+    public static void addTag(String nome){
+        Tag tag = new Tag(nome);
+        ConfiguracaoFirebase.salvarTag(tag);
     }
 
 }

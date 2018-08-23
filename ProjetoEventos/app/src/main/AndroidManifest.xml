@@ -31,12 +31,12 @@
         <activity
             android:name=".app.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-        </activity>
-
-        <activity android:name=".app.InscricaoActivity"
-            android:parentActivityName=".app.CadastrarEventoActivity"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".app.InscricaoActivity"
+            android:parentActivityName=".app.CadastrarEventoActivity" />
+        <activity android:name=".app.AdicionarTagInteresseAcitivity"
+            android:parentActivityName=".app.MainActivity"/>
     </application>
 
 </manifest>
