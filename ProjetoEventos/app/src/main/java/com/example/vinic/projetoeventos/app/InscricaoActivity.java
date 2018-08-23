@@ -25,9 +25,6 @@ import java.util.List;
 public class InscricaoActivity extends AppCompatActivity {
 
     RecyclerView rvInscricao;
-    TextView tvEventoNome;
-    TextView tvEventoData;
-    TextView tvEventoLocal;
     Evento evento;
     List<Atividade> atividades;
     ListaAtividadesRVAdapter adapter;

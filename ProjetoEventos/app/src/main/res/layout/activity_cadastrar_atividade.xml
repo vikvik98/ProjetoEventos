@@ -69,6 +69,16 @@
             android:background="@drawable/edit_text_mod"
             android:hint="Tipo de atividade"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Local:"/>
+
+        <Spinner
+            android:id="@+id/atividade_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
 
         <EditText
             android:id="@+id/valor_atividade"
