@@ -134,7 +134,9 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_eventos_inscritos) {
-            //robherty
+            addEvento.setVisibility(View.GONE);
+            reloadData(ConfiguracaoFirebase.pegarInscricoes(usuarioLogado));
+            Toast.makeText(this, "Xiiiiiii", Toast.LENGTH_SHORT).show();
 
 
         } else if (id == R.id.nav_editar_conta) {
