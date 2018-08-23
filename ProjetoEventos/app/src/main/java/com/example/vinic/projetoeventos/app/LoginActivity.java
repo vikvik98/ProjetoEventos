@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         ConfiguracaoFirebase.pegarUsuariosNoFirebase();
         ConfiguracaoFirebase.pegarEventosNoFirebase();
         ConfiguracaoFirebase.pegarInscricoesNoFirebase();
+
     }
 
 

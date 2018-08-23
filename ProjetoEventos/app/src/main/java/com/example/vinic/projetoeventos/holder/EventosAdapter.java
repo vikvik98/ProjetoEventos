@@ -2,13 +2,13 @@ package com.example.vinic.projetoeventos.holder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.EventoActivity;
@@ -18,6 +18,8 @@ import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHolder> {
 
@@ -52,16 +54,24 @@ public class EventosAdapter extends RecyclerView.Adapter<EventosAdapter.ViewHold
                     @Override
                     public void onClick(View v) {
                         if(evento.getKeyCriador().equals(MainActivity.usuarioLogado.getId())){
+                            editPreferencias("evento");
                             context.startActivity(new Intent(context, EventoActivity.class).putExtra("id", evento.getId()));
                         }else{
+                            editPreferencias("inscricao");
                             context.startActivity(new Intent(context, InscricaoActivity.class).putExtra("id", evento.getId()));
                         }
                     }
+
+                    private void editPreferencias(String texto) {
+                        SharedPreferences mPreferences = context.getSharedPreferences("event", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = mPreferences.edit();
+                        editor.putString("volta", texto);
+                        editor.commit();
+                        editor.apply();
+                    }
                 }
         );
-
     }
-
 
     @Override
     public int getItemCount() {

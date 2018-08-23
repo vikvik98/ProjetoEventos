@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.EventoCases;
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.model.Evento;
@@ -38,12 +39,14 @@ public class MainActivity extends AppCompatActivity
     private List<Evento> eventos = new ArrayList<>();
     private FloatingActionButton addEvento;
     public static Usuario usuarioLogado;
+    private SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
 
+        shared = getSharedPreferences("event", MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setupDrawer(toolbar);
@@ -59,8 +62,8 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences shared = getSharedPreferences("event",MODE_PRIVATE);
         boolean first = shared.getBoolean("first", false);
+        String volta = shared.getString("volta", "nenhum");
 
         if (first){
 
@@ -70,6 +73,10 @@ public class MainActivity extends AppCompatActivity
             editor.putBoolean("first", false);
             editor.commit();
             editor.apply();
+        }else if (volta.equals("inscricao")){
+            reloadData(pegarEventos(usuarioLogado));
+        }else if (volta.equals("evento")){
+            reloadData(pegarMeusEventos(usuarioLogado));
         }
 
     }
@@ -164,6 +171,7 @@ public class MainActivity extends AppCompatActivity
     public void adicionandoEvento(View view) {
         startActivityForResult(new Intent(this, CadastrarEventoActivity.class), 1);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
