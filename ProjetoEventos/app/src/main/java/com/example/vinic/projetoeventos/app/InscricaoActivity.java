@@ -31,6 +31,7 @@ public class InscricaoActivity extends AppCompatActivity {
     Evento evento;
     List<Atividade> atividades;
     ListaAtividadesRVAdapter adapter;
+    StringBuffer sb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +76,29 @@ public class InscricaoActivity extends AppCompatActivity {
     }
 
     public void confirmarInscricao(View view) {
+
+        sb = new StringBuffer();
+
+        for(Atividade atividade : adapter.atividadesChecadas){
+            InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividade);
+            sb.append(atividade.getNome());
+            sb.append("\n");
+
+
+        }
+
+        if(adapter.atividadesChecadas.size()>0){
+            Toast.makeText(this, sb.toString(), Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Selecione pelo menos uma atividade.", Toast.LENGTH_SHORT).show();
+        }
+        finish();
     }
 
     public void selecionarTudo(View view) {
+        for(Atividade atividade : adapter.atividadesChecadas){
+
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
        builder.setTitle("Inscrever-se em tudo?")
