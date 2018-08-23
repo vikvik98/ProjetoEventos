@@ -249,5 +249,32 @@ public class ConfiguracaoFirebase {
         return eventosInscritos;
     }
 
+    public static void atualizarCupom(Evento evento, Cupom cupom){
+        String keyEvent = evento.getId();
+        cupom.setQuant(cupom.getQuant()-1);
+        Map<String, Object> eventoValues = evento.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/eventos/" + keyEvent,eventoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+    }
+
+    public static String nomeUsuario(String keyUsuario){
+        for (int i = 0; i < usuarios.size(); i++){
+            if (keyUsuario.equals(usuarios.get(i).getId())){
+                return usuarios.get(i).getNome();
+            }
+        }
+        return null;
+    }
+
+    public static List<Inscricao> pegarInscricoes(String keyEvento){
+        List<Inscricao> inscricaoList = new ArrayList<>();
+        for (int i = 0; i < inscricoes.size(); i++){
+            if (inscricoes.get(i).getKeyEvento().equals(keyEvento)){
+                inscricaoList.add(inscricoes.get(i));
+            }
+        }
+        return inscricaoList;
+    }
 
 }
