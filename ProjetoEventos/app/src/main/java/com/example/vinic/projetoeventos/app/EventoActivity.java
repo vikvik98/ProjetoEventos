@@ -102,6 +102,7 @@ public class EventoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //TODO: faeer outro getItem
         if (item.getItemId() == R.id.gerar_cupom){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
