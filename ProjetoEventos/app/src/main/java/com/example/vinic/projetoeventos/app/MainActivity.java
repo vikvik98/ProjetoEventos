@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity
 
         if (first){
 
-            reloadData(pegarEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
             addEvento.setVisibility(View.GONE);
             SharedPreferences.Editor editor = shared.edit();
             editor.putBoolean("first", false);
@@ -74,16 +74,7 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private List<Evento> pegarEventos(Usuario usuarioLogado){
-        this.eventos.clear();
-        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++){
-            if (!ConfiguracaoFirebase.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                eventos.add(ConfiguracaoFirebase.eventosList.get(i));
 
-            }
-        }
-        return eventos;
-    }
 
 
     private List<Evento> pegarMeusEventos(Usuario usuarioLogado) {
@@ -96,6 +87,7 @@ public class MainActivity extends AppCompatActivity
         }
         return eventos;
     }
+
 
     private void setupDrawer(Toolbar toolbar) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -136,19 +128,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_eventos){
             addEvento.setVisibility(View.GONE);
-            reloadData(pegarEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
 
 
         } else if (id == R.id.nav_meus_eventos) {
 
             addEvento.setVisibility(View.VISIBLE);
-            reloadData(pegarMeusEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarMeusEventos(usuarioLogado));
 
         }else if (id == R.id.nav_eventos_colaborados) {
 
-            addEvento.setVisibility(View.VISIBLE);
-            //reloadData();
-            //TODO: TERMINAR FILTRO DE MEUS EVENTOS COLABORADOS
+            addEvento.setVisibility(View.GONE);
+            reloadData(ConfiguracaoFirebase.pegarColaboracoes(MainActivity.usuarioLogado));
 
 
         } else if (id == R.id.nav_eventos_inscritos) {
@@ -184,7 +175,7 @@ public class MainActivity extends AppCompatActivity
         }else{
             if (resultCode == RESULT_OK){
                 addEvento.setVisibility(View.GONE);
-                reloadData(pegarEventos(usuarioLogado));
+                reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
             }
         }
     }
