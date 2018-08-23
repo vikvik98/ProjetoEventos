@@ -25,8 +25,6 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
     private final List<Atividade> atividades;
     public List<Atividade> atividadesChecadas = new ArrayList<>();
 
-    //public Atividade[] atividadesChecadas = new ArrayList<>();
-
     public ListaAtividadesRVAdapter(Context context, List<Atividade> atividades){
 
         this.context = context;
@@ -49,7 +47,7 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
 
         final Atividade atividade = this.atividades.get(position);
         holder.tvAtividadesNome.setText(atividade.getNome());
-        holder.tvAtividadesdata.setText(atividade.getHoraInicio());
+        holder.tvAtividadesdata.setText(String.valueOf(atividade.getValor()));
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClick(View v, int pos) {
@@ -59,6 +57,7 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
                 if(cbInscricao.isChecked()){
 
                     atividadesChecadas.add(atividades.get(pos));
+
                 }else if(!cbInscricao.isChecked()){
 
                     atividadesChecadas.remove(atividades.get(pos));
