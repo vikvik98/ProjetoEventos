@@ -118,26 +118,19 @@ public class MainActivity extends AppCompatActivity
             addEvento.setVisibility(View.GONE);
             reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
 
-
         } else if (id == R.id.nav_meus_eventos) {
-
             addEvento.setVisibility(View.VISIBLE);
             reloadData(pegarMeusEventos(usuarioLogado));
 
         }else if (id == R.id.nav_eventos_colaborados) {
-
             addEvento.setVisibility(View.GONE);
             reloadData(ConfiguracaoFirebase.pegarColaboracoes(MainActivity.usuarioLogado));
 
-
         } else if (id == R.id.nav_eventos_inscritos) {
-
             addEvento.setVisibility(View.GONE);
             reloadData(ConfiguracaoFirebase.pegarInscricoes(usuarioLogado));
             
         } else if (id == R.id.nav_tag_interesse) {
-
-
             startActivity(new Intent(this, AdicionarTagInteresseAcitivity.class));
 
         } else if (id == R.id.nav_sair) {

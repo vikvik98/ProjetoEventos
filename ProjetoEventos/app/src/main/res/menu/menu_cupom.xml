@@ -14,4 +14,10 @@
         app:showAsAction="ifRoom"
         android:title="SubDono"/>
 
+    <item
+        android:id="@+id/verificar_pagamento"
+        android:icon="@drawable/ic_verificar_pagamento"
+        app:showAsAction="ifRoom"
+        android:title="Verificar Pagamento"/>
+
 </menu>

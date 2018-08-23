@@ -181,6 +181,11 @@ public class EventoActivity extends AppCompatActivity {
             builder.show();
             return true;
 
+        }else if (item.getItemId() == R.id.verificar_pagamento){
+            Intent intent = new Intent(this,VerificarInscricaoActivity.class);
+            intent.putExtra("id", evento.getId());
+
+            startActivity(intent);
         }
 
         return false;
