@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class InscricaoActivity extends AppCompatActivity {
     List<Atividade> atividades;
     ListaAtividadesRVAdapter adapter;
     StringBuffer sb = null;
+    int valorAtividades;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class InscricaoActivity extends AppCompatActivity {
         }
 
         atividades = evento.getAtividades();
+
+
 
 
         //getActionBar().setTitle(evento.getNome());
@@ -70,38 +74,87 @@ public class InscricaoActivity extends AppCompatActivity {
         rvInscricao.setAdapter(adapter);
         rvInscricao.setLayoutManager(new LinearLayoutManager(InscricaoActivity.this));
 
+
+
     }
+
 
     public void confirmarInscricao(View view) {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        final View viewDialog = getLayoutInflater().inflate(R.layout.adicionar_cupom,null);
+
         sb = new StringBuffer();
-
+        valorAtividades = 0;
         for(Atividade atividade : adapter.atividadesChecadas){
-            InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividade);
-            sb.append(atividade.getNome());
-            sb.append("\n");
-
-
+            valorAtividades += atividade.getValor();
         }
 
         if(adapter.atividadesChecadas.size()>0){
-            Toast.makeText(this, sb.toString(), Toast.LENGTH_SHORT).show();
+            builder.setView(viewDialog)
+                    .setTitle("Total: " + String.valueOf(valorAtividades) +"\nAplicar desconto(opcional)")
+                    .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            EditText etCupom = viewDialog.findViewById(R.id.et_cupom);
+                            String cupom = etCupom.getText().toString();
+
+                            for(int j = 0; j < evento.getCupons().size(); j++){
+                                if(cupom.equals(evento.getCupons().get(j).getCodigo())){
+                                    for(Atividade atividade : adapter.atividadesChecadas){
+                                        //Atividade atividadeNova = atividade;
+                                        float desconto = (float) (atividade.getValor() * evento.getCupons().get(j).getPorcentagem());
+                                        atividade.setValor(atividade.getValor() - desconto);
+                                        evento.getCupons().get(j).setQuant(evento.getCupons().get(j).getQuant()-1);
+                                        InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividade);
+                                        Toast.makeText(InscricaoActivity.this, "Cupom adicionado", Toast.LENGTH_SHORT).show();
+                                        //finish();
+
+                                        }
+                                    for(Atividade atividade : adapter.atividadesChecadas) {
+                                        InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividade);
+                                    }
+
+                                }else{
+                                    for(Atividade atividade : adapter.atividadesChecadas){
+                                        InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividade);
+                                        Toast.makeText(InscricaoActivity.this, "Valor sem cupom", Toast.LENGTH_SHORT).show();
+                                        finish();
+
+                                    }
+
+                                }
+                            }
+                        //finish();
+                        }
+                    })
+                    .setNegativeButton("Cancelar",null)
+                    .show();
+            Toast.makeText(InscricaoActivity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+
         }else{
-            Toast.makeText(this, "Selecione pelo menos uma atividade.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(InscricaoActivity.this, "Selecione pelo menos uma atividade.", Toast.LENGTH_SHORT).show();
         }
-        finish();
+
+
     }
 
     public void selecionarTudo(View view) {
-        for(Atividade atividade : adapter.atividadesChecadas){
 
-        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final View viewDialog = getLayoutInflater().inflate(R.layout.adicionar_cupom,null);
 
-       builder.setTitle("Inscrever-se em tudo?")
+
+       builder.setView(viewDialog)
+               .setTitle("Inscrever-se em tudo?")
                .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(DialogInterface dialogInterface, int i) {
+                       EditText etCupom = viewDialog.findViewById(R.id.et_cupom);
+                       String cupom = etCupom.getText().toString();
                        for (int j = 0; j < atividades.size(); j++) {
                            Toast.makeText(InscricaoActivity.this, "" + j, Toast.LENGTH_SHORT).show();
                            InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividades.get(j));
