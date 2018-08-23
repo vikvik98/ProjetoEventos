@@ -172,14 +172,6 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(new Intent(this, CadastrarEventoActivity.class), 1);
     }
 
-    public boolean estaLogado(String emailUsuario){
-        if(emailUsuario.equals("nenhum")){
-            return false;
-        }else {
-            return true;
-        }
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
