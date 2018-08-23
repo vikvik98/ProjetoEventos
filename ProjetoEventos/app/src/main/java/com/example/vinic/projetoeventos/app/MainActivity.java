@@ -74,27 +74,11 @@ public class MainActivity extends AppCompatActivity
             editor.commit();
             editor.apply();
         }else if (volta.equals("inscricao")){
-            reloadData(pegarEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
         }else if (volta.equals("evento")){
-            reloadData(pegarMeusEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarMeusEventos(usuarioLogado));
         }
-
     }
-
-
-
-
-    private List<Evento> pegarMeusEventos(Usuario usuarioLogado) {
-        this.eventos.clear();
-        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++){
-            if (ConfiguracaoFirebase.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                eventos.add(ConfiguracaoFirebase.eventosList.get(i));
-
-            }
-        }
-        return eventos;
-    }
-
 
     private void setupDrawer(Toolbar toolbar) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -178,7 +162,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 1){
             if (resultCode == RESULT_OK){
                 addEvento.setVisibility(View.VISIBLE);
-                reloadData(pegarMeusEventos(usuarioLogado));
+                reloadData(ConfiguracaoFirebase.pegarMeusEventos(usuarioLogado));
             }
         }else{
             if (resultCode == RESULT_OK){
