@@ -12,6 +12,12 @@
         android:id="@+id/adicionar_sub_dono"
         android:icon="@drawable/ic_sub_dono"
         app:showAsAction="ifRoom"
-        android:title="SubDono"/>
+        android:title="Adicionar SubDono"/>
+
+    <item
+        android:id="@+id/validar_inscricao"
+        android:icon="@drawable/ic_validar_inscricao"
+        app:showAsAction="ifRoom"
+        android:title="Validar Inscrição"/>
 
 </menu>

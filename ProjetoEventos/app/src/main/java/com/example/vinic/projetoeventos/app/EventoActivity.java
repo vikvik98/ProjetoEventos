@@ -170,7 +170,8 @@ public class EventoActivity extends AppCompatActivity {
                         Toast.makeText(EventoActivity.this, "Usuario não encontrado", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            }).setNegativeButton
+                    ("Cancelar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(EventoActivity.this, "Cancelado", Toast.LENGTH_SHORT).show();
