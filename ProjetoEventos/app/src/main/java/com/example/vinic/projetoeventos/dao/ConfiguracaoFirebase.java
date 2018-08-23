@@ -232,4 +232,22 @@ public class ConfiguracaoFirebase {
         }
         return eventosGeral;
     }
+
+    public static List<Evento> pegarInscricoes(Usuario usuarioLogado){
+        List<Evento> eventosInscritos = new ArrayList<>();
+        for (int i = 0; i < inscricoes.size(); i++) {
+            if(inscricoes.get(i).getKeyUsuario().equals(usuarioLogado.getId())){
+                for (int j = 0; j < eventosList.size(); j++) {
+                    if (inscricoes.get(i).getKeyEvento().equals(eventosList.get(j).getId())){
+                        Evento evento = new Evento(eventosList.get(i).getNome(),eventosList.get(i).getTipoEvento(),eventosList.get(i).getLocal(),eventosList.get(i).getDataInicial(),eventosList.get(i).getDataFinal(),eventosList.get(i).getQuantPessoas(),eventosList.get(i).getKeyCriador());
+                        evento.setAtividades(inscricoes.get(i).getAtividades());
+                        eventosInscritos.add(evento);
+                    }
+                }
+            }
+        }
+        return eventosInscritos;
+    }
+
+
 }

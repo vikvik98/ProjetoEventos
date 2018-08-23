@@ -131,8 +131,12 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_eventos_inscritos) {
-            //robherty
+
+            addEvento.setVisibility(View.GONE);
+            reloadData(ConfiguracaoFirebase.pegarInscricoes(usuarioLogado));
+            
         } else if (id == R.id.nav_tag_interesse) {
+
 
             startActivity(new Intent(this, AdicionarTagInteresseAcitivity.class));
 
