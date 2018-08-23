@@ -8,4 +8,10 @@
         app:showAsAction="ifRoom"
         android:title="Cupom"/>
 
+    <item
+        android:id="@+id/adicionar_sub_dono"
+        android:icon="@drawable/ic_sub_dono"
+        app:showAsAction="ifRoom"
+        android:title="SubDono"/>
+
 </menu>

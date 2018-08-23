@@ -23,6 +23,7 @@ public class Evento {
     private List<Cupom> cupons = new ArrayList<>();
     private List<Tag> tags  = new ArrayList<>();
     private List<Evento> eventos = new ArrayList<>();
+    private List<Usuario> colaboradores = new ArrayList<>();
     private String keyCriador;
 
     public Evento() {
@@ -47,6 +48,70 @@ public class Evento {
 
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
+    }
+
+    public void setDataInicial(Date dataInicial) {
+        this.dataInicial = dataInicial;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
+    public int getQuantPessoas() {
+        return quantPessoas;
+    }
+
+    public void setQuantPessoas(int quantPessoas) {
+        this.quantPessoas = quantPessoas;
+    }
+
+    public void setStatusDoEvento(String statusDoEvento) {
+        this.statusDoEvento = statusDoEvento;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
+    public String getTipoEvento() {
+        return tipoEvento;
+    }
+
+    public void setTipoEvento(String tipoEvento) {
+        this.tipoEvento = tipoEvento;
+    }
+
+    public List<String> getInstituicoes() {
+        return instituicoes;
+    }
+
+    public void setInstituicoes(List<String> instituicoes) {
+        this.instituicoes = instituicoes;
+    }
+
+    public void setAtividades(List<Atividade> atividades) {
+        this.atividades = atividades;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public List<Usuario> getColaboradores() {
+        return colaboradores;
+    }
+
+    public void setColaboradores(List<Usuario> colaboradores) {
+        this.colaboradores = colaboradores;
+    }
+
+    public void setKeyCriador(String keyCriador) {
+        this.keyCriador = keyCriador;
     }
 
     public String getKeyCriador() {
@@ -114,6 +179,7 @@ public class Evento {
         result.put("keyCriador", keyCriador);
         result.put("cupons", cupons);
         result.put("eventos", eventos);
+        result.put("colaboradores", colaboradores);
 
 
         return result;

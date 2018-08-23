@@ -24,6 +24,8 @@ import com.example.vinic.projetoeventos.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase.pegarMeusEventos;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -60,43 +62,19 @@ public class MainActivity extends AppCompatActivity
 
         if (first){
 
-            reloadData(pegarEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
             addEvento.setVisibility(View.GONE);
             SharedPreferences.Editor editor = shared.edit();
             editor.putBoolean("first", false);
             editor.commit();
             editor.apply();
         }else if (volta.equals("inscricao")){
-            reloadData(pegarEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
         }else if (volta.equals("evento")){
             reloadData(pegarMeusEventos(usuarioLogado));
         }else{
             reloadData(pegarMeusEventos(usuarioLogado));
         }
-
-    }
-
-    private List<Evento> pegarEventos(Usuario usuarioLogado){
-        this.eventos.clear();
-        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++){
-            if (!ConfiguracaoFirebase.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                eventos.add(ConfiguracaoFirebase.eventosList.get(i));
-
-            }
-        }
-        return eventos;
-    }
-
-
-    private List<Evento> pegarMeusEventos(Usuario usuarioLogado) {
-        this.eventos.clear();
-        for (int i = 0; i < ConfiguracaoFirebase.eventosList.size(); i++){
-            if (ConfiguracaoFirebase.eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
-                eventos.add(ConfiguracaoFirebase.eventosList.get(i));
-
-            }
-        }
-        return eventos;
     }
 
     private void setupDrawer(Toolbar toolbar) {
@@ -138,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_eventos){
             addEvento.setVisibility(View.GONE);
-            reloadData(pegarEventos(usuarioLogado));
+            reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
 
 
         } else if (id == R.id.nav_meus_eventos) {
@@ -146,13 +124,17 @@ public class MainActivity extends AppCompatActivity
             addEvento.setVisibility(View.VISIBLE);
             reloadData(pegarMeusEventos(usuarioLogado));
 
+        }else if (id == R.id.nav_eventos_colaborados) {
+
+            addEvento.setVisibility(View.GONE);
+            reloadData(ConfiguracaoFirebase.pegarColaboracoes(MainActivity.usuarioLogado));
+
+
         } else if (id == R.id.nav_eventos_inscritos) {
             //robherty
-
         } else if (id == R.id.nav_tag_interesse) {
 
             startActivity(new Intent(this, AdicionarTagInteresseAcitivity.class));
-
 
         } else if (id == R.id.nav_sair) {
             usuarioLogado = null;
@@ -181,7 +163,7 @@ public class MainActivity extends AppCompatActivity
         }else{
             if (resultCode == RESULT_OK){
                 addEvento.setVisibility(View.GONE);
-                reloadData(pegarEventos(usuarioLogado));
+                reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
             }
         }
     }
