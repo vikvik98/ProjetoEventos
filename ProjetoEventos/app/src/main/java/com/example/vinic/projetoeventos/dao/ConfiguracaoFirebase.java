@@ -176,4 +176,12 @@ public class ConfiguracaoFirebase {
     }
 
 
+    public static void salvarColaboradores(Usuario usuario, Evento evento) {
+        String keyEvent = evento.getId();
+        evento.getColaboradores().add(usuario);
+        Map<String, Object> eventoValues = evento.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/eventos/" + keyEvent,eventoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+    }
 }

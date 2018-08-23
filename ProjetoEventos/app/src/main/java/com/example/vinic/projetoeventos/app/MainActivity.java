@@ -144,8 +144,16 @@ public class MainActivity extends AppCompatActivity
             addEvento.setVisibility(View.VISIBLE);
             reloadData(pegarMeusEventos(usuarioLogado));
 
+        }else if (id == R.id.nav_eventos_colaborados) {
+
+            addEvento.setVisibility(View.VISIBLE);
+            //reloadData();
+            //TODO: TERMINAR FILTRO DE MEUS EVENTOS COLABORADOS
+
+
         } else if (id == R.id.nav_eventos_inscritos) {
             //robherty
+
 
         } else if (id == R.id.nav_editar_conta) {
             //robherty

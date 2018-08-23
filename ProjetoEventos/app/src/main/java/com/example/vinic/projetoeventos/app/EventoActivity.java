@@ -19,10 +19,10 @@ import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.cases.CupomCases;
+import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
-import com.example.vinic.projetoeventos.model.Cupom;
 import com.example.vinic.projetoeventos.model.Evento;
 
 import java.text.ParseException;
@@ -45,7 +45,8 @@ public class EventoActivity extends AppCompatActivity {
     private double porcentagem;
     private Calendar dataCupom;
     private TextView tvDataTerminoCupom;
-    private EditText edPadraoCupom;
+    private MenuItem menuCupom;
+    private MenuItem menuDono;
 
 
     @Override
@@ -86,7 +87,6 @@ public class EventoActivity extends AppCompatActivity {
         tvEventoData = findViewById(R.id.lista_atividade_data);
         tvEventoLocal = findViewById(R.id.lista_atividade_local);
         tvDataTerminoCupom = findViewById(R.id.data_termino_cupom);
-
         atividades = new ArrayList<>();
         dataCupom = Calendar.getInstance();
 
@@ -102,56 +102,88 @@ public class EventoActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
+        if (item.getItemId() == R.id.gerar_cupom){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View inflate = getLayoutInflater().inflate(R.layout.alert_cupom, null);
 
-        EditText quantidadeCupons = inflate.findViewById(R.id.cupom_quant);
-        spinner = inflate.findViewById(R.id.spinnerCupom);
-        tvDataTerminoCupom = inflate.findViewById(R.id.data_termino_cupom);
-        EditText cupomName = inflate.findViewById(R.id.padrao_cupom);
+            EditText quantidadeCupons = inflate.findViewById(R.id.cupom_quant);
+            spinner = inflate.findViewById(R.id.spinnerCupom);
+            tvDataTerminoCupom = inflate.findViewById(R.id.data_termino_cupom);
+            EditText cupomName = inflate.findViewById(R.id.padrao_cupom);
 
 
-        builder.setTitle("Gerar cumpons: ");
-        builder.setView(inflate)
+            builder.setTitle("Gerar cumpons: ");
+            builder.setView(inflate)
 
-                .setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
 
-                    @Override
+                        @Override
 
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (spinner.getSelectedItemPosition() == 0) {
-                            porcentagem = 0.5;
-                        } else if (spinner.getSelectedItemPosition() == 1) {
-                            porcentagem = 0.25;
-                        } else {
-                            porcentagem = 0.5;
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            if (spinner.getSelectedItemPosition() == 0) {
+                                porcentagem = 0.5;
+                            } else if (spinner.getSelectedItemPosition() == 1) {
+                                porcentagem = 0.25;
+                            } else {
+                                porcentagem = 0.5;
+                            }
+
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
+                            Date hoje = new Date();
+                            format.format(hoje);
+
+                            try {
+                                Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
+                                Date dataInicioCupom = format.parse(format.format(hoje));
+                                int quantidade = Integer.parseInt(quantidadeCupons.getText().toString());
+                                String padrao = cupomName.getText().toString();
+                                CupomCases.cadastrarCupom(evento,padrao,quantidade,dataInicioCupom,dataTerminoCupom,porcentagem);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
+                    })
 
-                        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yy");
-                        Date hoje = new Date();
-                        format.format(hoje);
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                        try {
-                            Date dataTerminoCupom = format.parse(tvDataTerminoCupom.getText().toString());
-                            Date dataInicioCupom = format.parse(format.format(hoje));
-                            int quantidade = Integer.parseInt(quantidadeCupons.getText().toString());
-                            String padrao = cupomName.getText().toString();
-                            CupomCases.cadastrarCupom(evento,padrao,quantidade,dataInicioCupom,dataTerminoCupom,porcentagem);
-                        } catch (ParseException e) {
-                            e.printStackTrace();
                         }
-                    }
-                })
+                    });
+            builder.create();
+            builder.show();
+            return true;
+        }else if (item.getItemId() == R.id.adicionar_sub_dono){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            View inflate = getLayoutInflater().inflate(R.layout.alert_sub_dono, null);
 
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            EditText emailSubDono = inflate.findViewById(R.id.email_sub_dono);
 
+            builder.setTitle("Adicionar Colaborador");
+            builder.setView(inflate);
+            builder.setPositiveButton("Adicionar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    if (UsuarioCases.pegarUsuario(emailSubDono.getText().toString()) != null){
+                        UsuarioCases.adicionarColaborador(UsuarioCases.pegarUsuario(emailSubDono.getText().toString()),evento);
+                    }else{
+                        Toast.makeText(EventoActivity.this, "Usuario não encontrado", Toast.LENGTH_SHORT).show();
                     }
-                });
-        builder.create();
-        builder.show();
-        return true;
+                }
+            }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(EventoActivity.this, "Cancelado", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            builder.create();
+            builder.show();
+            return true;
+
+        }
+
+        return false;
     }
 
     @Override
