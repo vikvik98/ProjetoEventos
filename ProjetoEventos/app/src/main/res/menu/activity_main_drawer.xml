@@ -22,9 +22,9 @@
             android:icon="@drawable/ic_inscrito"
             android:title="Eventos Inscrito" />
         <item
-            android:id="@+id/nav_editar_conta"
+            android:id="@+id/nav_tag_interesse"
             android:icon="@drawable/ic_editar_conta"
-            android:title="Editar Perfil" />
+            android:title="Adicinor tag de interesse" />
         <item
             android:id="@+id/nav_sair"
             android:icon="@drawable/ic_logout"

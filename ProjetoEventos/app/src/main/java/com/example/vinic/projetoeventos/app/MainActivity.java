@@ -1,28 +1,21 @@
 package com.example.vinic.projetoeventos.app;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
-import com.example.vinic.projetoeventos.cases.EventoCases;
-import com.example.vinic.projetoeventos.cases.UsuarioCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.EventosAdapter;
 import com.example.vinic.projetoeventos.model.Evento;
@@ -30,6 +23,8 @@ import com.example.vinic.projetoeventos.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase.pegarMeusEventos;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -76,7 +71,9 @@ public class MainActivity extends AppCompatActivity
         }else if (volta.equals("inscricao")){
             reloadData(ConfiguracaoFirebase.pegarEventos(usuarioLogado));
         }else if (volta.equals("evento")){
-            reloadData(ConfiguracaoFirebase.pegarMeusEventos(usuarioLogado));
+            reloadData(pegarMeusEventos(usuarioLogado));
+        }else{
+            reloadData(pegarMeusEventos(usuarioLogado));
         }
     }
 
@@ -125,7 +122,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_meus_eventos) {
 
             addEvento.setVisibility(View.VISIBLE);
-            reloadData(ConfiguracaoFirebase.pegarMeusEventos(usuarioLogado));
+            reloadData(pegarMeusEventos(usuarioLogado));
 
         }else if (id == R.id.nav_eventos_colaborados) {
 
@@ -135,10 +132,9 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_eventos_inscritos) {
             //robherty
+        } else if (id == R.id.nav_tag_interesse) {
 
-
-        } else if (id == R.id.nav_editar_conta) {
-            //robherty
+            startActivity(new Intent(this, AdicionarTagInteresseAcitivity.class));
 
         } else if (id == R.id.nav_sair) {
             usuarioLogado = null;
@@ -162,7 +158,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == 1){
             if (resultCode == RESULT_OK){
                 addEvento.setVisibility(View.VISIBLE);
-                reloadData(ConfiguracaoFirebase.pegarMeusEventos(usuarioLogado));
+                reloadData(pegarMeusEventos(usuarioLogado));
             }
         }else{
             if (resultCode == RESULT_OK){
