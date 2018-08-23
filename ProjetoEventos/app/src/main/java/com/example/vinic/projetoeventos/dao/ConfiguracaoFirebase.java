@@ -180,4 +180,46 @@ public class ConfiguracaoFirebase {
     }
 
 
+    public static void salvarColaboradores(Usuario usuario, Evento evento) {
+        String keyEvent = evento.getId();
+        evento.getColaboradores().add(usuario);
+        Map<String, Object> eventoValues = evento.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/eventos/" + keyEvent,eventoValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+    }
+
+    public static List<Evento> pegarColaboracoes(Usuario usuarioLogado){
+        List<Evento> eventosColaboradores = new ArrayList<>();
+        for (int i = 0; i < eventosList.size(); i++){
+            for (int j = 0; j < eventosList.get(i).getColaboradores().size(); j++){
+                if (eventosList.get(i).getColaboradores().get(j).getId().equals(usuarioLogado.getId())){
+                    eventosColaboradores.add(eventosList.get(i));
+                }
+            }
+        }
+        return eventosColaboradores;
+    }
+
+    public static List<Evento> pegarMeusEventos(Usuario usuarioLogado) {
+        List<Evento> meusEventos = new ArrayList<>();
+        for (int i = 0; i <eventosList.size(); i++){
+            if (eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
+                meusEventos.add(eventosList.get(i));
+
+            }
+        }
+        return meusEventos;
+    }
+
+    public static List<Evento> pegarEventos(Usuario usuarioLogado){
+        List<Evento> eventosGeral = new ArrayList<>();
+        for (int i = 0; i < eventosList.size(); i++){
+            if (!eventosList.get(i).getKeyCriador().equals(usuarioLogado.getId())){
+                eventosGeral.add(eventosList.get(i));
+
+            }
+        }
+        return eventosGeral;
+    }
 }

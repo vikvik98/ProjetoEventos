@@ -12,6 +12,11 @@
             android:id="@+id/nav_meus_eventos"
             android:icon="@drawable/ic_meus_eventos"
             android:title="Meus Eventos" />
+
+        <item
+            android:id="@+id/nav_eventos_colaborados"
+            android:icon="@drawable/ic_minhas_colaboracoes"
+            android:title="Minhas Colaborações" />
         <item
             android:id="@+id/nav_eventos_inscritos"
             android:icon="@drawable/ic_inscrito"
