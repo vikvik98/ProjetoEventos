@@ -22,6 +22,7 @@ public class Evento {
     private List<Atividade> atividades = new ArrayList<>();
     private List<Cupom> cupons = new ArrayList<>();
     private List<Tag> tags  = new ArrayList<>();
+    private List<Evento> eventos = new ArrayList<>();
     private List<Usuario> colaboradores = new ArrayList<>();
     private String keyCriador;
 
@@ -39,6 +40,14 @@ public class Evento {
         this.statusDoEvento = "Aberto";
         this.quantPessoas = quantPessoas;
         this.keyCriador = keyCriador;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
     }
 
     public void setDataInicial(Date dataInicial) {
@@ -169,6 +178,7 @@ public class Evento {
         result.put("tags", tags);
         result.put("keyCriador", keyCriador);
         result.put("cupons", cupons);
+        result.put("eventos", eventos);
         result.put("colaboradores", colaboradores);
 
 

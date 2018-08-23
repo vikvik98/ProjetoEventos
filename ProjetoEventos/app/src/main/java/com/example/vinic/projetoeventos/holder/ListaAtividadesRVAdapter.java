@@ -12,15 +12,20 @@ import android.widget.TextView;
 import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.InscricaoCases;
+import com.example.vinic.projetoeventos.cases.ItemClickListener;
 import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Inscricao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividadesRVAdapter.ViewHolder> {
 
     private final Context context;
     private final List<Atividade> atividades;
+    public List<Atividade> atividadesChecadas = new ArrayList<>();
+
+    //public Atividade[] atividadesChecadas = new ArrayList<>();
 
     public ListaAtividadesRVAdapter(Context context, List<Atividade> atividades){
 
@@ -45,6 +50,21 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
         final Atividade atividade = this.atividades.get(position);
         holder.tvAtividadesNome.setText(atividade.getNome());
         holder.tvAtividadesdata.setText(atividade.getHoraInicio());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View v, int pos) {
+                CheckBox cbInscricao = (CheckBox) v;
+
+                //CHECAR SE ESTAR CHECADO OU NÃO
+                if(cbInscricao.isChecked()){
+
+                    atividadesChecadas.add(atividades.get(pos));
+                }else if(!cbInscricao.isChecked()){
+
+                    atividadesChecadas.remove(atividades.get(pos));
+                }
+            }
+        });
 
         if(atividade.getKeyCriador().equals(MainActivity.usuarioLogado.getId())){
             holder.cbInscricao.setVisibility(View.GONE);
@@ -68,10 +88,11 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
 
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         protected TextView tvAtividadesNome;
         protected  TextView tvAtividadesdata;
         protected CheckBox cbInscricao;
+        protected ItemClickListener itemClickListener;
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -79,8 +100,20 @@ public class ListaAtividadesRVAdapter extends RecyclerView.Adapter<ListaAtividad
             tvAtividadesNome = (TextView) itemView.findViewById(R.id.nome_atividade);
             tvAtividadesdata = (TextView) itemView.findViewById(R.id.data_atividade);
             cbInscricao = itemView.findViewById(R.id.checkbox_inscricao);
+
+            cbInscricao.setOnClickListener(this);
         }
 
+        public void setItemClickListener(ItemClickListener ic){
+            this.itemClickListener = ic;
+
+    }
+
+
+        @Override
+        public void onClick(View view) {
+            this.itemClickListener.onItemClick(view,getLayoutPosition());
+        }
     }
 
 

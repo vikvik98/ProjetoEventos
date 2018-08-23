@@ -9,6 +9,7 @@ import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Cupom;
 import com.example.vinic.projetoeventos.model.Evento;
 import com.example.vinic.projetoeventos.model.Inscricao;
+import com.example.vinic.projetoeventos.model.Tag;
 import com.example.vinic.projetoeventos.model.Usuario;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -179,6 +180,15 @@ public class ConfiguracaoFirebase {
         ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
     }
 
+    public static void salvarTag(Tag tag){
+        String keyId = MainActivity.usuarioLogado.getId();
+        MainActivity.usuarioLogado.getTags().add(tag);
+        Map<String, Object> usuarioValues = MainActivity.usuarioLogado.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/usuarios/" + keyId,usuarioValues);
+        ConfiguracaoFirebase.getDatabaseReference().updateChildren(childUpdates);
+
+    }
 
     public static void salvarColaboradores(Usuario usuario, Evento evento) {
         String keyEvent = evento.getId();
