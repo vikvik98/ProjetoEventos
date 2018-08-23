@@ -9,7 +9,7 @@ public class InscricaoCases {
 
     public static boolean inserirAtividadeNaInscricao(String keyUsuario,String keyEvento,Atividade atividade){
         Inscricao inscricao = new Inscricao(keyUsuario,keyEvento);
-        ConfiguracaoFirebase.salvarInscricaoFirebase(keyUsuario,keyEvento,atividade,inscricao);
+        ConfiguracaoFirebase.salvarInscricaoFirebase(inscricao, atividade);
         return true;
     }
 

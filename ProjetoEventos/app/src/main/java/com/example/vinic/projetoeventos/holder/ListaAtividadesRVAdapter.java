@@ -13,6 +13,7 @@ import com.example.vinic.projetoeventos.R;
 import com.example.vinic.projetoeventos.app.MainActivity;
 import com.example.vinic.projetoeventos.cases.InscricaoCases;
 import com.example.vinic.projetoeventos.model.Atividade;
+import com.example.vinic.projetoeventos.model.Inscricao;
 
 import java.util.List;
 

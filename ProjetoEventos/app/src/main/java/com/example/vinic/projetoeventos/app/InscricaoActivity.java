@@ -1,18 +1,23 @@
 package com.example.vinic.projetoeventos.app;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.vinic.projetoeventos.R;
+import com.example.vinic.projetoeventos.cases.InscricaoCases;
 import com.example.vinic.projetoeventos.dao.ConfiguracaoFirebase;
 import com.example.vinic.projetoeventos.holder.ListaAtividadesRVAdapter;
 import com.example.vinic.projetoeventos.model.Atividade;
 import com.example.vinic.projetoeventos.model.Evento;
+import com.example.vinic.projetoeventos.model.Inscricao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +78,21 @@ public class InscricaoActivity extends AppCompatActivity {
     }
 
     public void selecionarTudo(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+       builder.setTitle("Inscrever-se em tudo?")
+               .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialogInterface, int i) {
+                       for (int j = 0; j < atividades.size(); j++) {
+                           Toast.makeText(InscricaoActivity.this, "" + j, Toast.LENGTH_SHORT).show();
+                           InscricaoCases.inserirAtividadeNaInscricao(MainActivity.usuarioLogado.getId(), evento.getId(), atividades.get(j));
+
+                       }finish();
+                   }
+               })
+               .setNegativeButton("Cancelar",null)
+               .show();
+
     }
 }
